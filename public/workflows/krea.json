@@ -1,0 +1,659 @@
+{
+  "51": {
+    "inputs": {
+      "ResolutionState": "{\"mode\":\"preset\",\"ratio\":\"2:3\",\"w\":1152,\"h\":1728,\"custom_w\":3928,\"custom_h\":1808,\"custom_ratio_w\":21,\"custom_ratio_h\":9,\"snap\":8}"
+    },
+    "class_type": "PixaromaResolution",
+    "_meta": {
+      "title": "Resolution Pixaroma"
+    }
+  },
+  "52": {
+    "inputs": {
+      "text": ""
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Promt"
+    }
+  },
+  "53": {
+    "inputs": {
+      "filename_prefix": "img",
+      "save_mode": "save",
+      "pixaroma_buttons": null,
+      "pixaroma_strip": null,
+      "image": [
+        "30:8",
+        0
+      ],
+      "CivitaiMeta": "1"
+    },
+    "class_type": "PixaromaPreview",
+    "_meta": {
+      "title": "Preview Image Pixaroma"
+    }
+  },
+  "56": {
+    "inputs": {
+      "image": "pasted_1785698120548.png",
+      "LoadImagePixState": "{\"version\":1,\"mode\":\"max_mp\",\"max_mp\":1,\"longest_side\":1024,\"scale_factor\":1,\"fit_w\":1024,\"fit_h\":1024,\"cover_w\":1024,\"cover_h\":1024,\"ratio_preset\":\"1:1\",\"ratio_w\":1,\"ratio_h\":1,\"ratio_action\":\"crop\",\"pad_color\":\"#808080\",\"pad_top\":0,\"pad_bottom\":0,\"pad_left\":0,\"pad_right\":0,\"crop_anchor\":\"center\",\"crop_scale\":true,\"snap\":8,\"resample\":\"auto\",\"allow_upscale\":true,\"orig_name\":\"pasted_1785698120548.png\"}"
+    },
+    "class_type": "PixaromaLoadImage",
+    "_meta": {
+      "title": "Load Image Pixaroma"
+    }
+  },
+  "57": {
+    "inputs": {
+      "text": "motion lines,motion blur, bloom, subsurface scattering, tooncore, @prettycake, gradeXniji_style, gpt2, m1V8, masterpiece, very aesthetic, A highly detailed, full-body shot of a glamorous blonde woman with straight, shoulder-length hair and bangs, seated in a relaxed, slightly reclined pose against a backdrop of lush green Christmas trees adorned with warm white fairy lights. She wears a playful black velvet bunny ear headband perched atop her head, framing her face. Her upper body is bare, showcasing full, natural breasts and delicate purple satin bows — one at the nape of her neck, another draped across her chest like a corset accent — both tied with sheer black lace trim beneath them. She wears high-waisted black lace garter stockings that extend up to her thighs, anchored by ornate black lace garters on her left thigh and right calf. Her arms are crossed over her lap, revealing intricate black ink tattoos along her left forearm and inner bicep. At her feet rests a miniature white rocking horse with gold trim and red saddle, adding whimsy to the scene. The camera angle is slightly low, capturing her from mid-thigh up, emphasizing her elongated limbs and curvaceous silhouette. Soft ambient lighting highlights her smooth skin, avoiding any glistening or dampness. Behind her, an arched doorway reveals a second lit tree, while gift boxes — one white with black ribbon, another striped green and white — sit at the base of the trees. Her expression is calm and alluring, lips slightly parted, eyes gazing directly forward. Every element — from the texture of the velvet ears to the delicate lace edges — is rendered with photorealistic precision, creating a festive yet sensual holiday portrait.",
+      "source": [
+        "30:28",
+        0
+      ]
+    },
+    "class_type": "PixaromaShowText",
+    "_meta": {
+      "title": "Show Text Pixaroma"
+    }
+  },
+  "84": {
+    "inputs": {
+      "text": "tooncore, @prettycake, gradeXniji_style, gpt2, m1V8, masterpiece, very aesthetic"
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Trigger words"
+    }
+  },
+  "120": {
+    "inputs": {},
+    "class_type": "PixaromaGroupSwitch",
+    "_meta": {
+      "title": "Group Switch Pixaroma"
+    }
+  },
+  "144": {
+    "inputs": {
+      "text": "",
+      "source": [
+        "30:133",
+        1
+      ]
+    },
+    "class_type": "PixaromaShowText",
+    "_meta": {
+      "title": "Reasoning"
+    }
+  },
+  "231": {
+    "inputs": {
+      "text": "motion lines,motion blur, bloom, subsurface scattering, "
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Доп промт (добавляется после LLM)"
+    }
+  },
+  "241": {
+    "inputs": {
+      "SlidersState": "{\"version\":1,\"sliders\":[{\"type\":\"toggle\",\"value\":1,\"out\":\"bool\"},{\"type\":\"toggle\",\"value\":1,\"out\":\"bool\"},{\"type\":\"toggle\",\"value\":1,\"out\":\"bool\"},{\"type\":\"toggle\",\"value\":1,\"out\":\"bool\"},{\"type\":\"combo\",\"value\":\"off\"},{\"type\":\"combo\",\"value\":\"Zero - ImagePromt 18 test.txt\"}]}"
+    },
+    "class_type": "PixaromaSliders",
+    "_meta": {
+      "title": "Control Panel Pixaroma"
+    }
+  },
+  "244": {
+    "inputs": {
+      "SlidersState": "{\"version\":1,\"sliders\":[{\"type\":\"combo\",\"value\":\"Huihui-Qwen3.5-9B-abliterated.Q4_K_M.gguf\"},{\"type\":\"combo\",\"value\":\"Huihui-Qwen3.5-9B-abliterated.mmproj-Q8_0.gguf\"},{\"type\":\"combo\",\"value\":\"krea2_turbo_int8_convrot.safetensors\"},{\"type\":\"int\",\"value\":10},{\"type\":\"combo\",\"value\":\"er_sde\"},{\"type\":\"combo\",\"value\":\"simple\"}]}"
+    },
+    "class_type": "PixaromaSliders",
+    "_meta": {
+      "title": "LLM Models"
+    }
+  },
+  "245": {
+    "inputs": {
+      "max_resolution": 0,
+      "jpeg_quality": 80,
+      "suppress_default_preview": true,
+      "preview_frames": 1,
+      "preview_fps": 1,
+      "model": [
+        "250",
+        0
+      ],
+      "vae": [
+        "30:12",
+        0
+      ]
+    },
+    "class_type": "ModelPreviewOverrideKJ",
+    "_meta": {
+      "title": "Model Preview Override"
+    }
+  },
+  "250": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "lora_1": {
+        "on": false,
+        "lora": "Krea 2\\Ps_gpt2-style_v3-krea2.safetensors",
+        "strength": 0.7
+      },
+      "lora_2": {
+        "on": false,
+        "lora": "Krea 2\\krea2-masterpieces-v51.safetensors",
+        "strength": 0.75
+      },
+      "lora_3": {
+        "on": true,
+        "lora": "Krea 2\\prettycake_epoch_7.safetensors",
+        "strength": 1
+      },
+      "lora_4": {
+        "on": true,
+        "lora": "Krea 2\\realism_engine_krea2_v3.1.safetensors",
+        "strength": 0.75
+      },
+      "lora_5": {
+        "on": true,
+        "lora": "Krea 2\\bloomgirls-ultrarealism-krea2_4k.safetensors",
+        "strength": 0.8
+      },
+      "lora_6": {
+        "on": false,
+        "lora": "Krea 2\\Krea2_TextFusion_Refusal_Reduction.safetensors",
+        "strength": 1
+      },
+      "lora_7": {
+        "on": true,
+        "lora": "Krea 2\\gradeXnijiKrea2_00004.safetensors",
+        "strength": 0.55
+      },
+      "lora_8": {
+        "on": false,
+        "lora": "Krea 2\\lenovo_krea2.safetensors",
+        "strength": 0.85
+      },
+      "lora_9": {
+        "on": false,
+        "lora": "Krea 2\\tooncore_-_tags_krea_epoch_8.safetensors",
+        "strength": 0.85
+      },
+      "lora_10": {
+        "on": false,
+        "lora": "Krea 2\\aumirageV2.safetensors",
+        "strength": 0.3
+      },
+      "lora_11": {
+        "on": false,
+        "lora": "Krea 2\\ZeroLeloushe\\Zeroleloushe_krea2.safetensors",
+        "strength": 1.25
+      },
+      "lora_12": {
+        "on": false,
+        "lora": "Krea 2\\kroma-v0.1.safetensors",
+        "strength": 1
+      },
+      "lora_13": {
+        "on": false,
+        "lora": "Krea 2\\PosingDynamics-Krea2.safetensors",
+        "strength": 0.55
+      },
+      "➕ Add Lora": "",
+      "model": [
+        "30:220",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "251": {
+    "inputs": {
+      "SeedState": "{\"runSeed\":19712}",
+      "seed": 19712
+    },
+    "class_type": "PixaromaSeed",
+    "_meta": {
+      "title": "Seed LLM"
+    }
+  },
+  "252": {
+    "inputs": {
+      "SeedState": "{\"runSeed\":78748}",
+      "seed": 78748
+    },
+    "class_type": "PixaromaSeed",
+    "_meta": {
+      "title": "Seed Image"
+    }
+  },
+  "30:8": {
+    "inputs": {
+      "samples": [
+        "30:99",
+        0
+      ],
+      "vae": [
+        "30:12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Декодировать VAE"
+    }
+  },
+  "30:17": {
+    "inputs": {
+      "string_a": "",
+      "string_b": [
+        "30:19",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Объединить"
+    }
+  },
+  "30:20": {
+    "inputs": {
+      "source": [
+        "30:21",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "Предпросмотр любого"
+    }
+  },
+  "30:28": {
+    "inputs": {
+      "switch": [
+        "30:23",
+        0
+      ],
+      "on_false": [
+        "30:20",
+        0
+      ],
+      "on_true": [
+        "30:27",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Переключатель"
+    }
+  },
+  "30:24": {
+    "inputs": {
+      "value": [
+        "241",
+        0
+      ]
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Promt Enhance"
+    }
+  },
+  "30:23": {
+    "inputs": {
+      "value": [
+        "241",
+        3
+      ]
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Enable Lora"
+    }
+  },
+  "30:221": {
+    "inputs": {
+      "unet_name": [
+        "244",
+        2
+      ],
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Загрузить модель диффузии"
+    }
+  },
+  "30:219": {
+    "inputs": {
+      "sage_attention": "auto",
+      "allow_compile": true,
+      "model": [
+        "30:221",
+        0
+      ]
+    },
+    "class_type": "PathchSageAttentionKJ",
+    "_meta": {
+      "title": "Patch Sage Attention KJ"
+    }
+  },
+  "30:220": {
+    "inputs": {
+      "allow_compile": true,
+      "model": [
+        "30:219",
+        0
+      ]
+    },
+    "class_type": "PatchFlashAttentionKJ",
+    "_meta": {
+      "title": "Patch Flash Attention KJ"
+    }
+  },
+  "30:21": {
+    "inputs": {
+      "switch": [
+        "30:24",
+        0
+      ],
+      "on_false": [
+        "30:19",
+        0
+      ],
+      "on_true": [
+        "30:133",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Переключатель"
+    }
+  },
+  "30:88": {
+    "inputs": {
+      "value": [
+        "241",
+        1
+      ]
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Enable trigger word?"
+    }
+  },
+  "30:27": {
+    "inputs": {
+      "string_a": [
+        "30:229",
+        0
+      ],
+      "string_b": [
+        "30:20",
+        0
+      ],
+      "delimiter": ", "
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Concatenate Text (LoRA Trigger Word)"
+    }
+  },
+  "30:87": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Text String (System Prompt)"
+    }
+  },
+  "30:86": {
+    "inputs": {
+      "switch": [
+        "30:88",
+        0
+      ],
+      "on_false": [
+        "30:87",
+        0
+      ],
+      "on_true": [
+        "84",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Переключатель"
+    }
+  },
+  "30:230": {
+    "inputs": {
+      "switch": [
+        "241",
+        2
+      ],
+      "on_false": [
+        "30:87",
+        0
+      ],
+      "on_true": [
+        "231",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Переключатель"
+    }
+  },
+  "30:19": {
+    "inputs": {
+      "value": [
+        "52",
+        0
+      ]
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Text String (User Prompt)"
+    }
+  },
+  "30:229": {
+    "inputs": {
+      "string_a": [
+        "30:230",
+        0
+      ],
+      "string_b": [
+        "30:86",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Concatenate Text (LoRA Trigger Word)"
+    }
+  },
+  "30:12": {
+    "inputs": {
+      "vae_name": "krea2RealVae_v10.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Загрузить VAE"
+    }
+  },
+  "30:133": {
+    "inputs": {
+      "model": [
+        "244",
+        0
+      ],
+      "mmproj": [
+        "244",
+        1
+      ],
+      "system_prompt": [
+        "241",
+        5
+      ],
+      "prompt": [
+        "30:17",
+        0
+      ],
+      "max_tokens": 8500,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "top_k": 20,
+      "repeat_penalty": 1.05,
+      "ctx_size": 8192,
+      "memory_mode": "gpu_and_cpu_moe_layers",
+      "n_gpu_layers": 999,
+      "n_cpu_moe_layers": 22,
+      "seed": [
+        "251",
+        0
+      ],
+      "timeout_seconds": 300,
+      "reasoning": [
+        "241",
+        4
+      ],
+      "enable_processing": true,
+      "extra_args": "",
+      "image": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "LLMTextProcessor",
+    "_meta": {
+      "title": "Prompt Enhancer"
+    }
+  },
+  "30:5": {
+    "inputs": {
+      "width": [
+        "51",
+        0
+      ],
+      "height": [
+        "51",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Пустое латентное изображение"
+    }
+  },
+  "30:6": {
+    "inputs": {
+      "text": [
+        "30:28",
+        0
+      ],
+      "clip": [
+        "30:11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Кодирование текста CLIP (Запрос)"
+    }
+  },
+  "30:11": {
+    "inputs": {
+      "clip_name": "Huihui-Qwen3-VL-4B-Instruct-abliterated-fp8_scaled.safetensors",
+      "type": "krea2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Загрузить CLIP"
+    }
+  },
+  "30:255": {
+    "inputs": {
+      "text": "Wet skin, sweat on the skin, drops, streaks,  scars, wounds, skin defects",
+      "clip": [
+        "30:11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Кодирование текста CLIP (Запрос)"
+    }
+  },
+  "30:13": {
+    "inputs": {
+      "conditioning": [
+        "30:6",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Обнуление кондиционирования"
+    }
+  },
+  "30:99": {
+    "inputs": {
+      "seed": [
+        "252",
+        0
+      ],
+      "steps": [
+        "244",
+        3
+      ],
+      "cfg": 1,
+      "sampler_name": [
+        "244",
+        4
+      ],
+      "scheduler": [
+        "244",
+        5
+      ],
+      "denoise": 1,
+      "model": [
+        "245",
+        0
+      ],
+      "positive": [
+        "30:6",
+        0
+      ],
+      "negative": [
+        "30:13",
+        0
+      ],
+      "latent_image": [
+        "30:5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  }
+}

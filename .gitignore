@@ -1,0 +1,33 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
+
+dist/
+.output/
+.vinxi/
+.nitro/
+.tanstack/
+.vercel/
+.wrangler/
+.pglite/
+data/
+*.db
+
+.grok/
+artifacts/
+attachments/
+.project_id
+.node_modules.lock
+
+# sandbox / agent
+AGENTS.md
+AGENTS.project.md
+startup.sh
+public/__grok/
+
+# local smoke captures — public set lives in docs/screenshots
+/screenshots/

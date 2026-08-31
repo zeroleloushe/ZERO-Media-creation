@@ -1,0 +1,675 @@
+{
+  "114": {
+    "inputs": {
+      "image": "img_00279_.png",
+      "LoadImageMiniState": "{\"version\":1,\"mode\":\"max_mp\",\"max_mp\":1,\"longest_side\":1024,\"scale_factor\":1,\"fit_w\":1024,\"fit_h\":1024,\"cover_w\":1024,\"cover_h\":1024,\"ratio_preset\":\"1:1\",\"ratio_w\":1,\"ratio_h\":1,\"ratio_action\":\"crop\",\"pad_color\":\"#808080\",\"pad_top\":0,\"pad_bottom\":0,\"pad_left\":0,\"pad_right\":0,\"crop_anchor\":\"center\",\"crop_scale\":true,\"snap\":16,\"resample\":\"auto\",\"allow_upscale\":true,\"orig_name\":\"img_00279_.png\"}"
+    },
+    "class_type": "PixaromaLoadImageMini",
+    "_meta": {
+      "title": "Изображение 1 (Сцена или персонаж)"
+    }
+  },
+  "116": {
+    "inputs": {
+      "max_resolution": 0,
+      "jpeg_quality": 80,
+      "suppress_default_preview": true,
+      "preview_frames": 1,
+      "preview_fps": 1,
+      "model": [
+        "117",
+        0
+      ]
+    },
+    "class_type": "ModelPreviewOverrideKJ",
+    "_meta": {
+      "title": "Model Preview Override"
+    }
+  },
+  "117": {
+    "inputs": {
+      "model": [
+        "111:71",
+        0
+      ],
+      "LoraLoaderState": "{\"version\":1,\"sep\":\", \",\"cacheMode\":\"last\",\"loras\":[{\"name\":\"Krea 2\\\\realism_engine_krea2_v3.1.safetensors\",\"on\":false,\"sm\":0.8,\"sc\":0.8,\"triggers\":[]},{\"name\":\"Krea 2\\\\zy_Cinematic_Shot_K2.safetensors\",\"on\":false,\"sm\":1,\"sc\":1,\"triggers\":[\"zy_cinematic\"]},{\"name\":\"Krea 2\\\\lenovo_krea2.safetensors\",\"on\":false,\"sm\":0.9,\"sc\":0.9,\"triggers\":[]},{\"name\":\"Krea 2\\\\bloomgirls-ultrarealism-krea2_4k.safetensors\",\"on\":true,\"sm\":0.65,\"sc\":0.65,\"triggers\":[]},{\"name\":\"Krea 2\\\\Krea2_TextFusion_Refusal_Reduction.safetensors\",\"on\":true,\"sm\":1,\"sc\":1,\"triggers\":[]},{\"name\":\"Krea 2\\\\Ps_gpt2-style_v3-krea2.safetensors\",\"on\":false,\"sm\":0.65,\"sc\":0.65,\"triggers\":[]},{\"name\":\"Krea 2\\\\krea2-masterpieces-v51.safetensors\",\"on\":false,\"sm\":0.75,\"sc\":0.75,\"triggers\":[]},{\"name\":\"\",\"on\":false,\"sm\":1,\"sc\":1,\"triggers\":[]}]}"
+    },
+    "class_type": "PixaromaLoraLoader",
+    "_meta": {
+      "title": "LoRA Loader Pixaroma"
+    }
+  },
+  "118": {
+    "inputs": {
+      "text": "Use the reference image only to extract the character identity.\n\nThe reference contains multiple views of ONE character. These views are NOT part of the final image.\n\nGenerate a new image with ONLY ONE character.\nDo not include the reference sheet, additional poses, duplicates, clones, or multiple versions.\n\nKeep the exact same face, hairstyle, outfit, body proportions and details from the reference.\n\nCreate the following scene:\n\nThe girl is goes in the middle of a dark fantasy castle, with gloomy lighting. She goes. The frame is in view.\n\nA shot from a film, teleobjective, motion blur, graininess, cinematic shot."
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Promt"
+    }
+  },
+  "119": {
+    "inputs": {
+      "filename_prefix": "img",
+      "save_mode": "save",
+      "pixaroma_buttons": null,
+      "pixaroma_strip": null,
+      "image": [
+        "111:54",
+        0
+      ],
+      "CivitaiMeta": "1"
+    },
+    "class_type": "PixaromaPreview",
+    "_meta": {
+      "title": "Preview Image Pixaroma"
+    }
+  },
+  "120": {
+    "inputs": {
+      "ResolutionState": "{\"mode\":\"custom_ratio\",\"ratio\":\"9:16\",\"w\":1536,\"h\":672,\"custom_w\":864,\"custom_h\":480,\"custom_ratio_w\":21,\"custom_ratio_h\":9,\"snap\":32}"
+    },
+    "class_type": "PixaromaResolution",
+    "_meta": {
+      "title": "Resolution Pixaroma"
+    }
+  },
+  "121": {
+    "inputs": {
+      "SeedState": "{\"runSeed\":11746}",
+      "seed": 11746
+    },
+    "class_type": "PixaromaSeed",
+    "_meta": {
+      "title": "Seed Image"
+    }
+  },
+  "123": {
+    "inputs": {},
+    "class_type": "PixaromaGroupSwitch",
+    "_meta": {
+      "title": "Group Switch Pixaroma"
+    }
+  },
+  "130": {
+    "inputs": {
+      "text": "Use the reference image only to extract the character identity.\n\nThe reference contains multiple views of ONE character. These views are NOT part of the final image.\n\nGenerate a new image with ONLY ONE character.\nDo not include the reference sheet, additional poses, duplicates, clones, or multiple versions.\n\nKeep the exact same face, hairstyle, outfit, body proportions and details from the reference.\n\nCreate the following scene:\n\nA girl is sitting on an expensive sports bike in front of a nighttime Tokyo skyline, posing for a photo."
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Промт - генерация по картоке персонажа"
+    }
+  },
+  "141": {
+    "inputs": {
+      "text": "Hi, create a character sheet with 5 angles, full-length — front, side, back. Close-up of the face from the front and side, normal symmetrical eyes.\n\nThis image contains exactly 5 separate views of the same character arranged as a clean character sheet.\n\nTOP HALF = 3 equally sized panels placed side by side.\n\nBOTTOM HALF = 2 equally sized panels placed side by side.\n\nEvery panel has a thin black border.\n\nEvery panel uses a pure black background.\n\nThe layout must remain perfectly aligned and symmetrical.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPHOTO 1 — TOP LEFT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFull body.\n\nFront view.\n\nCamera faces the character directly.\n\nThe character stands perfectly upright in a neutral pose.\n\nHead at the top of the frame.\n\nFeet at the bottom.\n\nArms hang naturally straight down.\n\nHands relaxed.\n\nNo gestures.\n\nNo body twist.\n\nCharacter looks directly at the camera.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPHOTO 2 — TOP CENTER\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFull body.\n\nRight-side view.\n\nCamera is exactly 90 degrees to the right.\n\nThe character faces strictly left.\n\nPure profile.\n\nNot a 3/4 angle.\n\nNot rotated toward the camera.\n\nArms remain straight down.\n\nBody posture identical to Photo 1.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPHOTO 3 — TOP RIGHT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFull body.\n\nBack view.\n\nCamera faces directly toward the character's back.\n\nArms remain straight down.\n\nBody posture identical to Photo 1.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCRITICAL RULE FOR PHOTOS 1–3\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nThe character keeps exactly the same pose.\n\nThe character only rotates.\n\nThe camera never moves.\n\nCamera distance never changes.\n\nCamera focal length never changes.\n\nPerspective never changes.\n\nZoom never changes.\n\nThe top of the head aligns perfectly across all three panels.\n\nThe feet align perfectly across all three panels.\n\nThe body occupies exactly the same amount of space in every panel.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPHOTO 4 — BOTTOM LEFT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nClose-up.\n\nFront view.\n\nCharacter looks directly at the camera.\n\nFrame begins at the top of the head.\n\nFrame ends exactly at the collarbone.\n\nNothing below the collarbone is visible.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPHOTO 5 — BOTTOM RIGHT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nClose-up.\n\nRight-side view.\n\nPure profile.\n\nCamera exactly 90 degrees to the right.\n\nFrame begins at the top of the head.\n\nFrame ends exactly at the collarbone.\n\nNothing below the collarbone is visible.\n\nHead height matches Photo 4 exactly.\n\nScale matches Photo 4 exactly."
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Промт - создание карточки персонажа с сохранением стиля"
+    }
+  },
+  "142": {
+    "inputs": {
+      "text": "You are generating ONE image that looks exactly like the reference photo.\n\nThis image contains 5 separate photographs of the same person, arranged in a grid.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nWHAT THE FINAL IMAGE LOOKS LIKE\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n\n\nTOP HALF of the image = 3 photos side by side (equal width, equal height)\n\nBOTTOM HALF of the image = 2 photos side by side (equal width, equal height)\n\nEvery photo has a thin black border around it.\n\nAll 5 photos have pure black background.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPHOTO 1 — top-left\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFull body. FRONT VIEW. Camera faces the person directly.\n\nPerson stands in the center. Head at top, feet at bottom.\n\nArms hang straight down along the body. No bending, no gestures.\n\nPerson looks straight into the camera.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPHOTO 2 — top-center\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFull body. RIGHT SIDE VIEW. Camera is exactly 90 degrees to the right of the person.\n\nThe person faces strictly left. This is a pure profile — not 3/4, not angled.\n\nArms hang straight down. Same height and scale as Photo 1.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPHOTO 3 — top-right\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFull body. BACK VIEW. Camera faces the person's back directly.\n\nArms hang straight down. Same height and scale as Photo 1 and Photo 2.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCRITICAL RULE FOR PHOTOS 1-2-3\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nThe person is the same size in all 3 photos.\n\nTop of head is at the same height in all 3 photos.\n\nFeet are at the same height in all 3 photos.\n\nCamera zoom does not change between photos.\n\nThe person only rotates — the camera never moves.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPHOTO 4 — bottom-left\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCLOSE-UP. FRONT VIEW. Face and person looking straight at camera.\n\nFrame starts at the top of the head.\n\nFrame ends at the collarbone. Nothing below the collarbone is visible.\n\nThis photo shows: top of head → face → neck → collarbone. That is all.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPHOTO 5 — bottom-right\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCLOSE-UP. RIGHT SIDE VIEW. Pure profile — camera exactly 90 degrees to the right.\n\nFrame starts at the top of the head.\n\nFrame ends at the collarbone. Nothing below the collarbone is visible.\n\nSame scale as Photo 4. Head top at the same height as in Photo 4.\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTHE PERSON — same in all 5 photos\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCopy the person from the reference image exactly.\n\nSame face. Same hair color, length, and style in every photo.\n\nDo not change the hairstyle for any angle. Do not tie up or simplify it.\n\nSame clothing in every photo — back view wears the same outfit as front view.\n\nSame accessories in every photo. Do not remove anything.\n\nSame makeup. Do not add or change any detail.\n\nSame style\n\n\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nLIGHTING & QUALITY\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nStudio softbox lighting. Same light in all 5 photos.\n\nSharp focus. High resolution. Pure black background in every photo."
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Промт - создание карточки персонажа"
+    }
+  },
+  "261": {
+    "inputs": {
+      "image1": [
+        "265",
+        0
+      ],
+      "image2": [
+        "119",
+        0
+      ]
+    },
+    "class_type": "PixaromaCompare",
+    "_meta": {
+      "title": "Image Compare Pixaroma"
+    }
+  },
+  "265": {
+    "inputs": {
+      "filename_prefix": "img",
+      "save_mode": "save",
+      "pixaroma_buttons": null,
+      "pixaroma_strip": null,
+      "image": [
+        "264:311",
+        0
+      ],
+      "CivitaiMeta": "1"
+    },
+    "class_type": "PixaromaPreview",
+    "_meta": {
+      "title": "Preview Image Pixaroma"
+    }
+  },
+  "266": {
+    "inputs": {
+      "SeedState": "{\"runSeed\":21947}",
+      "seed": 21947
+    },
+    "class_type": "PixaromaSeed",
+    "_meta": {
+      "title": "Seed Image"
+    }
+  },
+  "267": {
+    "inputs": {
+      "model": [
+        "111:55",
+        0
+      ],
+      "LoraLoaderState": "{\"version\":1,\"sep\":\", \",\"cacheMode\":\"last\",\"loras\":[{\"name\":\"Krea 2\\\\lenovo_krea2.safetensors\",\"on\":false,\"sm\":0.45,\"sc\":0.45,\"triggers\":[]},{\"name\":\"Krea 2\\\\Krea2_TextFusion_Refusal_Reduction.safetensors\",\"on\":false,\"sm\":1,\"sc\":1,\"triggers\":[]},{\"name\":\"Krea 2\\\\zy_Cinematic_Shot_K2.safetensors\",\"on\":true,\"sm\":0.5,\"sc\":0.5,\"triggers\":[]},{\"name\":\"Krea 2\\\\realism_engine_krea2_v3.1.safetensors\",\"on\":false,\"sm\":0.6,\"sc\":0.6,\"triggers\":[]}]}"
+    },
+    "class_type": "PixaromaLoraLoader",
+    "_meta": {
+      "title": "LoRA Loader Pixaroma"
+    }
+  },
+  "268": {
+    "inputs": {
+      "text": "Enhance and upscale the provided image to maximum high-resolution 4K quality while preserving the original image exactly.\n\nThe input image is the authoritative source. Preserve the original composition, framing, perspective, camera angle, subject identity, shapes, proportions, anatomy, poses, facial features, clothing, objects, environment, colors, lighting and overall visual style.\n\nDo not reinterpret, redesign or regenerate the image. Do not add, remove, replace or modify any objects or details. Do not change the identity or appearance of any person, character, animal, vehicle, building or other subject.\n\nIncrease resolution and restore fine details that may have been lost during the original generation or compression. Recover natural micro-details, sharp edges, fine textures, surface details, hair strands, fabric fibers, skin texture, material definition, small mechanical details and environmental textures where appropriate.\n\nImprove overall image fidelity, clarity and local detail while maintaining the exact original visual information. Preserve natural depth, realistic material response, lighting gradients, shadows, reflections and color relationships.\n\nRemove compression artifacts, pixelation, unwanted noise, blurry edges, jagged contours and low-resolution defects. Improve edge definition and fine texture without creating artificial oversharpening, halos or excessive contrast.\n\nUse intelligent detail reconstruction only where necessary to restore information that is genuinely implied by the original image. Never invent prominent new features or alter recognizable details.\n\nThe final result should look like the same original image captured or rendered at a significantly higher resolution, with cleaner edges, richer textures and substantially more visible fine detail.\n\nPhotorealistic detail preservation where applicable, high-quality CGI detail preservation where applicable, illustration detail preservation where applicable.\n\n4K, ultra high resolution, extremely detailed, crisp but natural, clean fine details, professional image restoration, production-quality result.\n\nSTRICT PRESERVATION:\nsame composition, same subjects, same identity, same proportions, same pose, same perspective, same colors, same lighting, same style, same visual content.\n\nONLY IMPROVE:\nresolution, sharpness, texture fidelity, micro-detail, edge quality, clarity and artifact removal."
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Апскейл"
+    }
+  },
+  "326": {
+    "inputs": {
+      "switch": [
+        "330",
+        0
+      ],
+      "on_false": [
+        "120",
+        0
+      ],
+      "on_true": [
+        "329",
+        2
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Высота"
+    }
+  },
+  "327": {
+    "inputs": {
+      "switch": [
+        "330",
+        0
+      ],
+      "on_false": [
+        "120",
+        1
+      ],
+      "on_true": [
+        "329",
+        3
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Ширина"
+    }
+  },
+  "329": {
+    "inputs": {
+      "image_info": [
+        "114",
+        1
+      ]
+    },
+    "class_type": "PixaromaImageInfo",
+    "_meta": {
+      "title": "Image Info Pixaroma"
+    }
+  },
+  "330": {
+    "inputs": {
+      "SlidersState": "{\"version\":1,\"sliders\":[{\"type\":\"toggle\",\"value\":0,\"out\":\"bool\"},{\"type\":\"toggle\",\"value\":0,\"out\":\"bool\"}]}"
+    },
+    "class_type": "PixaromaSliders",
+    "_meta": {
+      "title": "Control Panel Pixaroma"
+    }
+  },
+  "333": {
+    "inputs": {
+      "switch": [
+        "330",
+        1
+      ],
+      "on_false": [
+        "118",
+        0
+      ],
+      "on_true": [
+        "118",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "LLM Promt"
+    }
+  },
+  "335": {
+    "inputs": {
+      "text": "You are generating ONE image that is a 5-panel character turnaround sheet of the SAME person from the reference image.\n\nCRITICAL STYLE RULE\nMatch the exact artistic style of the reference image.\nSame medium. Same rendering. Same line quality. Same shading. Same color treatment. Same level of stylization.\nDo NOT convert the image to photorealism.\nDo NOT add photographic camera look, skin pores, lens blur, studio softbox lighting, or \"real photo\" texture unless those already exist in the reference.\nThe final sheet must look like it belongs to the same artwork as the reference, only with new angles.\n\nLAYOUT\nThis image contains 5 separate panels of the same character, arranged in a grid.\nEvery panel has a thin black border.\nAll 5 panels have a pure black background.\n\nTOP HALF = 3 panels side by side (equal width, equal height)\nBOTTOM HALF = 2 panels side by side (equal width, equal height)\n\nPANEL 1 — top-left\nFull body. FRONT VIEW. Camera faces the character directly.\nCharacter stands in the center. Head at top, feet at bottom.\nArms hang straight down along the body. No bending, no gestures.\nCharacter looks straight forward.\n\nPANEL 2 — top-center\nFull body. RIGHT SIDE VIEW. Exactly 90 degrees to the right.\nPure profile — not 3/4, not angled. Character faces strictly left.\nArms hang straight down.\nSame height and scale as Panel 1.\n\nPANEL 3 — top-right\nFull body. BACK VIEW. Camera faces the character's back directly.\nArms hang straight down.\nSame height and scale as Panel 1 and Panel 2.\n\nCRITICAL RULE FOR PANELS 1-2-3\nThe character is the same size in all 3 panels.\nTop of head is at the same height in all 3 panels.\nFeet are at the same height in all 3 panels.\nZoom does not change between panels.\nThe character only rotates — the framing stays identical.\n\nPANEL 4 — bottom-left\nCLOSE-UP. FRONT VIEW. Looking straight forward.\nFrame starts at the top of the head.\nFrame ends at the collarbone. Nothing below the collarbone is visible.\nShows only: top of head → face → neck → collarbone.\n\nPANEL 5 — bottom-right\nCLOSE-UP. RIGHT SIDE VIEW. Pure profile — exactly 90 degrees to the right.\nFrame starts at the top of the head.\nFrame ends at the collarbone. Nothing below the collarbone is visible.\nSame scale as Panel 4. Head top at the same height as in Panel 4.\n\nTHE CHARACTER — identical in all 5 panels\nCopy the character from the reference image exactly.\nSame face. Same hair color, length, and hairstyle in every panel.\nDo not change the hairstyle for any angle. Do not tie up or simplify it.\nSame clothing in every panel — back view wears the same outfit as front view.\nSame accessories in every panel. Do not remove anything.\nSame makeup / face markings / details. Do not add or invent new details.\n\nLIGHTING\nUse the same lighting logic as the reference image.\nDo not replace it with studio photography lighting.\nKeep the original contrast, highlights, and shadow style."
+    },
+    "class_type": "PixaromaText",
+    "_meta": {
+      "title": "Тест - карточка с переносом стиль"
+    }
+  },
+  "111:71": {
+    "inputs": {
+      "lora_name": "Krea 2\\krea2_identity_edit_v1_2_r128.safetensors",
+      "strength_model": 1,
+      "model": [
+        "111:55",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Загрузчик LoRA (Только модель)"
+    }
+  },
+  "111:57": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Загрузить VAE"
+    }
+  },
+  "111:85": {
+    "inputs": {
+      "prompt": "",
+      "grounding_px": 768,
+      "system_prompt": "",
+      "clip": [
+        "111:56",
+        0
+      ],
+      "image": [
+        "114",
+        0
+      ]
+    },
+    "class_type": "Krea2EditGroundedEncode",
+    "_meta": {
+      "title": "negative (leave empty)"
+    }
+  },
+  "111:82": {
+    "inputs": {
+      "width": [
+        "326",
+        0
+      ],
+      "height": [
+        "327",
+        0
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "Пустой SD3LatentImage"
+    }
+  },
+  "111:73": {
+    "inputs": {
+      "pixels": [
+        "114",
+        0
+      ],
+      "vae": [
+        "111:57",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "Кодировать VAE"
+    }
+  },
+  "111:54": {
+    "inputs": {
+      "samples": [
+        "111:53",
+        0
+      ],
+      "vae": [
+        "111:57",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Декодировать VAE"
+    }
+  },
+  "111:84": {
+    "inputs": {
+      "prompt": [
+        "333",
+        0
+      ],
+      "grounding_px": 768,
+      "system_prompt": "",
+      "clip": [
+        "111:56",
+        0
+      ],
+      "image": [
+        "114",
+        0
+      ]
+    },
+    "class_type": "Krea2EditGroundedEncode",
+    "_meta": {
+      "title": "Krea2 Edit (grounded encode)"
+    }
+  },
+  "111:55": {
+    "inputs": {
+      "unet_name": "krea2_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Загрузить модель диффузии"
+    }
+  },
+  "111:56": {
+    "inputs": {
+      "clip_name": "Huihui-Qwen3-VL-4B-Instruct-abliterated-fp8_scaled.safetensors",
+      "type": "krea2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Загрузить CLIP"
+    }
+  },
+  "111:53": {
+    "inputs": {
+      "seed": [
+        "121",
+        0
+      ],
+      "steps": 10,
+      "cfg": 1,
+      "sampler_name": "er_sde",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "111:79",
+        0
+      ],
+      "positive": [
+        "111:84",
+        0
+      ],
+      "negative": [
+        "111:85",
+        0
+      ],
+      "latent_image": [
+        "111:82",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "111:79": {
+    "inputs": {
+      "ref_boost": 4,
+      "ref_boost_a": 1,
+      "fit_mode": "fit",
+      "model": [
+        "116",
+        0
+      ],
+      "source_latent": [
+        "111:73",
+        0
+      ],
+      "vae": [
+        "111:57",
+        0
+      ],
+      "source_image": [
+        "114",
+        0
+      ],
+      "target_latent": [
+        "111:82",
+        0
+      ]
+    },
+    "class_type": "Krea2EditModelPatch",
+    "_meta": {
+      "title": "Krea2 Edit (source patch)"
+    }
+  },
+  "264:318": {
+    "inputs": {
+      "expression": "a * c / b + 512",
+      "values.a": [
+        "264:324",
+        2
+      ],
+      "values.b": [
+        "264:317",
+        0
+      ],
+      "values.c": [
+        "264:325",
+        1
+      ]
+    },
+    "class_type": "ComfyMathExpression",
+    "_meta": {
+      "title": "Математическое выражение"
+    }
+  },
+  "264:319": {
+    "inputs": {
+      "expression": "a * c / b + 512",
+      "values.a": [
+        "264:324",
+        3
+      ],
+      "values.b": [
+        "264:317",
+        0
+      ],
+      "values.c": [
+        "264:325",
+        1
+      ]
+    },
+    "class_type": "ComfyMathExpression",
+    "_meta": {
+      "title": "Математическое выражение"
+    }
+  },
+  "264:320": {
+    "inputs": {
+      "text": "2048",
+      "source": [
+        "264:318",
+        1
+      ]
+    },
+    "class_type": "PixaromaShowText",
+    "_meta": {
+      "title": "Show Text Pixaroma"
+    }
+  },
+  "264:321": {
+    "inputs": {
+      "text": "1184",
+      "source": [
+        "264:319",
+        1
+      ]
+    },
+    "class_type": "PixaromaShowText",
+    "_meta": {
+      "title": "Show Text Pixaroma"
+    }
+  },
+  "264:317": {
+    "inputs": {
+      "value": 2
+    },
+    "class_type": "PixaromaNumber",
+    "_meta": {
+      "title": "Number Pixaroma"
+    }
+  },
+  "264:314": {
+    "inputs": {
+      "image1": [
+        "264:311",
+        0
+      ],
+      "image2": [
+        "119",
+        0
+      ]
+    },
+    "class_type": "PixaromaCompare",
+    "_meta": {
+      "title": "Image Compare Pixaroma"
+    }
+  },
+  "264:309": {
+    "inputs": {
+      "text": "jpeg compression, scribbles, AI generated, hredded cloth",
+      "clip": [
+        "111:56",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "264:313": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Загрузить VAE"
+    }
+  },
+  "264:325": {
+    "inputs": {
+      "value": 2
+    },
+    "class_type": "PixaromaNumber",
+    "_meta": {
+      "title": "Upscale_by"
+    }
+  },
+  "264:324": {
+    "inputs": {
+      "image": [
+        "119",
+        0
+      ],
+      "ImageResizeState": "{\"mode\":\"off\",\"max_mp\":1,\"longest_side\":1024,\"scale_factor\":1,\"fit_w\":1024,\"fit_h\":1024,\"cover_w\":1024,\"cover_h\":1024,\"ratio_preset\":\"1:1\",\"ratio_w\":1,\"ratio_h\":1,\"ratio_action\":\"crop\",\"pad_color\":\"#808080\",\"pad_top\":0,\"pad_bottom\":0,\"pad_left\":0,\"pad_right\":0,\"crop_anchor\":\"center\",\"crop_scale\":true,\"snap\":8,\"resample\":\"auto\",\"allow_upscale\":true}"
+    },
+    "class_type": "PixaromaImageResize",
+    "_meta": {
+      "title": "Image Resize Pixaroma"
+    }
+  },
+  "264:311": {
+    "inputs": {
+      "seed": [
+        "266",
+        0
+      ],
+      "sampler_name": "exp_heun_2_x0_sde",
+      "scheduler": "sgm_uniform",
+      "steps": 4,
+      "cfg": 1,
+      "denoise": 0.2,
+      "upscale_by": [
+        "264:325",
+        1
+      ],
+      "max_tile_width": [
+        "264:318",
+        1
+      ],
+      "max_tile_height": [
+        "264:319",
+        1
+      ],
+      "context_anchor": 256,
+      "context_overlap": 32,
+      "image": [
+        "119",
+        0
+      ],
+      "model": [
+        "111:79",
+        0
+      ],
+      "clip": [
+        "111:56",
+        0
+      ],
+      "vae": [
+        "264:313",
+        0
+      ],
+      "upscale_model": [
+        "264:312",
+        0
+      ],
+      "negative": [
+        "264:309",
+        0
+      ]
+    },
+    "class_type": "ContextAnchoredTileUpscaleVL",
+    "_meta": {
+      "title": "Context-Anchored Tile Upscale (VL)"
+    }
+  },
+  "264:312": {
+    "inputs": {
+      "model_name": "4x-UltraSharp.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Загрузить модель апскейла"
+    }
+  }
+}
