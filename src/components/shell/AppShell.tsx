@@ -155,9 +155,9 @@ export function AppShell() {
 
   return (
     <div className="grain flex h-dvh flex-col overflow-hidden bg-bg text-fg">
-      <header className="sticky top-0 z-30 border-b border-line bg-bg/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1400px] flex-col lg:min-h-[72px] lg:px-4">
-          <div className="flex h-12 min-w-0 items-center gap-2 px-3 lg:h-[72px] lg:flex-1 lg:px-0">
+      <header className="sticky top-0 z-30 border-b border-line bg-bg/80 px-4 backdrop-blur-md sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-col lg:min-h-[72px]">
+          <div className="flex h-12 min-w-0 items-center gap-2 lg:h-[72px]">
             <div className="flex min-w-0 shrink-0 flex-col justify-center leading-none">
               <span className="text-[15px] font-semibold tracking-[0.16em] text-accent lg:text-[16px]">ZERO</span>
               <span className="mt-1 text-[8px] font-medium uppercase tracking-[0.22em] text-muted lg:mt-1.5 lg:text-[9px]">
@@ -201,21 +201,21 @@ export function AppShell() {
               <div className="hidden items-center gap-1 lg:flex">{desktopTools}</div>
             </div>
           </div>
-          <div className="flex items-center justify-around gap-0.5 border-t border-line px-1 py-1 lg:hidden">
+          <div className="flex items-center justify-around gap-0.5 border-t border-line py-1 lg:hidden">
             {iconTools}
           </div>
           <HwBar />
         </div>
       </header>
 
-      <main className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col overflow-y-auto px-4 py-4 lg:overflow-hidden">
+      <main className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-1 flex-col overflow-y-auto px-4 py-4 sm:px-6 lg:overflow-hidden lg:px-8 lg:py-6">
         {bay === "h3" ? <H3Workspace /> : null}
         {bay === "krea" ? <KreaWorkspace /> : null}
         {bay === "edit" ? <EditWorkspace /> : null}
         {bay === "upscale" ? <UpscaleWorkspace /> : null}
       </main>
 
-      <nav className="z-30 border-t border-line bg-bg/95 p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur-md lg:hidden">
+      <nav className="z-30 border-t border-line bg-bg/95 px-4 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:px-6 lg:hidden">
         <div className="flex gap-2">
           {busy ? (
             <Button variant="danger" size="lg" className="flex-1 text-base font-semibold" onClick={() => void interruptBay()}>

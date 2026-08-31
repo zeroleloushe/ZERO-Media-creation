@@ -61,7 +61,7 @@ export function HwBar() {
 
   return (
     <div
-      className="flex items-center gap-3 border-t border-line px-3 py-1.5 lg:px-0"
+      className="flex items-center gap-3 border-t border-line py-2"
       title={snap.gpu || "железо"}
     >
       {snap.ramTotal ? <Meter label="RAM" used={snap.ramUsed} total={snap.ramTotal} /> : null}
