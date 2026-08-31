@@ -95,21 +95,13 @@ export function AppShell() {
     }
   }
 
-  const tools = (
+  const iconTools = (
     <>
-      <Button
-        variant="ghost"
-        size="icon-sm"
-        disabled={busy || freeing}
-        onClick={() => void clearMemory()}
-        aria-label="Очистить память"
-      >
+      <Button variant="ghost" size="icon-sm" disabled={busy || freeing} onClick={() => void clearMemory()} aria-label="Очистить память">
         <MemoryStick />
-        <span className="hidden lg:inline">{freeing ? "Чищу…" : "Память"}</span>
       </Button>
       <Button variant="ghost" size="icon-sm" onClick={() => setNotesOpen(true)} aria-label="Заметки">
         <StickyNote />
-        <span className="hidden lg:inline">Заметки</span>
       </Button>
       <Button variant="ghost" size="icon-sm" onClick={() => setGalleryOpen(true)} aria-label="Галерея">
         <Images />
@@ -122,7 +114,32 @@ export function AppShell() {
       </Button>
       <Button variant="subtle" size="icon-sm" onClick={() => setLinkOpen(true)} aria-label={comfyUrl ? "Связь" : "Подключить"}>
         <Link2 />
-        <span className="hidden lg:inline">{comfyUrl ? "Связь" : "Подключить"}</span>
+      </Button>
+    </>
+  );
+
+  const desktopTools = (
+    <>
+      <Button variant="ghost" size="sm" disabled={busy || freeing} onClick={() => void clearMemory()} aria-label="Очистить память">
+        <MemoryStick />
+        <span className="hidden xl:inline">{freeing ? "Чищу…" : "Память"}</span>
+      </Button>
+      <Button variant="ghost" size="sm" onClick={() => setNotesOpen(true)} aria-label="Заметки">
+        <StickyNote />
+        <span className="hidden xl:inline">Заметки</span>
+      </Button>
+      <Button variant="ghost" size="icon-sm" onClick={() => setGalleryOpen(true)} aria-label="Галерея">
+        <Images />
+      </Button>
+      <Button variant="ghost" size="icon-sm" onClick={() => void exportJson()} aria-label="Скачать JSON">
+        <Download />
+      </Button>
+      <Button variant="ghost" size="icon-sm" onClick={() => void copyJson()} aria-label="Копировать payload">
+        <Clapperboard />
+      </Button>
+      <Button variant="subtle" size="sm" onClick={() => setLinkOpen(true)}>
+        <Link2 />
+        <span className="hidden xl:inline">{comfyUrl ? "Связь" : "Подключить"}</span>
       </Button>
     </>
   );
@@ -141,7 +158,7 @@ export function AppShell() {
             <div className="mx-auto hidden min-w-0 flex-1 justify-center lg:flex lg:max-w-[520px]">
               <Segmented value={bay} onChange={setBay} options={BAYS} />
             </div>
-            <div className="ml-auto flex min-w-0 items-center gap-1.5">
+            <div className="ml-auto flex shrink-0 items-center gap-1.5">
               <div className="mr-1 hidden items-center gap-2 font-mono text-xs tabular-nums text-muted lg:flex">
                 {runningId ? (
                   <>
@@ -155,8 +172,8 @@ export function AppShell() {
               {busy ? (
                 <Button
                   variant="danger"
-                  size="md"
-                  className="px-4 font-semibold lg:h-12 lg:min-w-[124px] lg:px-6 lg:text-base"
+                  size="lg"
+                  className="h-10 min-w-0 px-4 text-sm font-semibold lg:h-12 lg:min-w-[124px] lg:px-6 lg:text-base"
                   onClick={() => void interruptBay()}
                 >
                   <Square className="size-3 fill-current" />
@@ -165,18 +182,18 @@ export function AppShell() {
               ) : (
                 <Button
                   variant="accent"
-                  size="md"
-                  className="px-5 font-semibold shadow-[0_0_28px_rgb(196_165_116_/_0.5)] lg:h-12 lg:min-w-[124px] lg:px-7 lg:text-base"
+                  size="lg"
+                  className="h-10 min-w-0 px-5 text-sm font-semibold shadow-[0_0_28px_rgb(196_165_116_/_0.5)] lg:h-12 lg:min-w-[124px] lg:px-7 lg:text-base"
                   onClick={() => void runBay(bay)}
                 >
                   Пуск
                 </Button>
               )}
-              <div className="hidden items-center gap-1 lg:flex">{tools}</div>
+              <div className="hidden items-center gap-1 lg:flex">{desktopTools}</div>
             </div>
           </div>
           <div className="flex items-center justify-around gap-0.5 border-t border-line px-1 py-1 lg:hidden">
-            {tools}
+            {iconTools}
           </div>
         </div>
       </header>
