@@ -16,4 +16,4 @@ echo
 echo "Панель (prod):  http://127.0.0.1:8080"
 echo "Comfy:          http://127.0.0.1:8188"
 echo
-exec npm run preview:prod
+exec node scripts/with-app-env.mjs vite preview --host 0.0.0.0 --port 8080
