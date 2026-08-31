@@ -305,6 +305,7 @@ export function ImageWell({
   compact,
   accept = "image/*",
   kind = "picture",
+  surfaceClass,
   onChange,
   onCrop,
   onClear,
@@ -314,6 +315,7 @@ export function ImageWell({
   compact?: boolean;
   accept?: string;
   kind?: "picture" | "video";
+  surfaceClass?: string;
   onChange: (file: File) => void;
   onCrop?: () => void;
   onClear: () => void;
@@ -337,6 +339,7 @@ export function ImageWell({
         className={cn(
           "relative block w-full cursor-pointer overflow-hidden rounded-xl bg-elevated",
           compact ? "aspect-video" : "aspect-[3/4]",
+          surfaceClass,
           over && "ring-1 ring-accent/50",
         )}
       >

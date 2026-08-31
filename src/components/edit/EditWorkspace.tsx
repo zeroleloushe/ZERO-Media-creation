@@ -42,7 +42,7 @@ export function EditWorkspace() {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:h-full lg:min-h-0 lg:flex-1 lg:grid-cols-[minmax(0,1fr)_360px]">
-      <div className="flex h-full min-h-0 flex-col gap-4">
+      <div className="flex h-full min-h-0 flex-col gap-4 overflow-y-auto">
         <PreviewStage
           url={preview}
           kind="image"
@@ -54,10 +54,11 @@ export function EditWorkspace() {
           progress={Math.max(liveProgress, running?.progress ?? 0)}
           empty="Загрузи исходник и карту персонажа. LLM здесь нет — только grounded edit."
         />
-        <div className="grid shrink-0 grid-cols-2 gap-3 rounded-2xl bg-surface p-4">
+        <div className="grid shrink-0 grid-cols-2 gap-3 rounded-2xl bg-surface p-3 sm:p-4">
           <ImageWell
             item={edit.image1}
             label="Изображение 1 · сцена или персонаж"
+            surfaceClass="max-h-[160px] sm:max-h-[180px] lg:max-h-[min(200px,28dvh)]"
             onChange={(f) => void setFile("image1", f)}
             onCrop={() => setCropWhich("image1")}
             onClear={() => patch({ image1: null })}
@@ -65,6 +66,7 @@ export function EditWorkspace() {
           <ImageWell
             item={edit.image2}
             label="Изображение 2 · карта"
+            surfaceClass="max-h-[160px] sm:max-h-[180px] lg:max-h-[min(200px,28dvh)]"
             onChange={(f) => void setFile("image2", f)}
             onCrop={() => setCropWhich("image2")}
             onClear={() => patch({ image2: null })}

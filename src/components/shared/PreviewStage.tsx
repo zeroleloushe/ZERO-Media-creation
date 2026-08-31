@@ -137,7 +137,7 @@ export function PreviewStage({
   );
 
   return (
-    <div className="relative flex min-h-[320px] w-full flex-1 items-center justify-center overflow-hidden rounded-2xl bg-surface lg:min-h-0">
+    <div className="relative flex min-h-[240px] w-full flex-1 items-center justify-center overflow-hidden rounded-2xl bg-surface lg:min-h-[min(36dvh,420px)]">
       {!frame ? (
         <div className="flex flex-col items-center gap-3 px-8 text-center">
           <div className="flex gap-1">
