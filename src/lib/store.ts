@@ -16,6 +16,7 @@ import type {
   ScenePreset,
   UpscaleState,
 } from "./types";
+import { isBay } from "./types";
 import { defaultLoraCatalog, loraLabel, LLM_MODELS, MMPROJ_MODELS, SAMPLERS, SCHEDULERS, SYSTEM_PROMPTS, UNET_MODELS } from "./presets";
 import { uid as makeId } from "./utils";
 import { emptyBundle } from "./h3-chunks";
@@ -576,6 +577,7 @@ export const useLab = create<LabState>()(
             },
       ),
       partialize: (s) => ({
+        bay: s.bay,
         comfyUrl: s.comfyUrl,
         h3: {
           ...s.h3,
@@ -605,6 +607,7 @@ export const useLab = create<LabState>()(
         return {
           ...current,
           ...p,
+          bay: isBay(p.bay) ? p.bay : current.bay,
           comfyUrl: (typeof p.comfyUrl === "string" && p.comfyUrl.trim()) || current.comfyUrl,
           h3: {
             ...current.h3,

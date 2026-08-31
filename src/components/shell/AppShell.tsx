@@ -12,6 +12,7 @@ import { exportCurrent, interruptBay, refreshLink, runBay } from "@/lib/run";
 import { DEFAULT_COMFY_URL, freeComfyMemory, normalizeComfyUrl } from "@/lib/comfy";
 import { useLab } from "@/lib/store";
 import type { Bay } from "@/lib/types";
+import { isBay } from "@/lib/types";
 import { copyText, downloadText, formatClock } from "@/lib/utils";
 import { Clapperboard, Download, Images, Link2, MemoryStick, Square, StickyNote } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -45,11 +46,20 @@ export function AppShell() {
       else if (!useLab.getState().comfyUrl.trim()) {
         useLab.getState().setComfyUrl(DEFAULT_COMFY_URL);
       }
-      if (b && ["h3", "krea", "edit", "upscale"].includes(b)) setBay(b);
+      if (isBay(b)) setBay(b);
       await refreshLink();
     };
     void boot();
   }, [setBay]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("bay") === bay) return;
+    url.searchParams.set("bay", bay);
+    const next = `${url.pathname}${url.search}${url.hash}`;
+    window.history.replaceState(window.history.state, "", next);
+  }, [bay]);
 
   async function exportJson() {
     const g = await exportCurrent(bay);

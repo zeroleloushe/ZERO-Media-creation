@@ -1,5 +1,11 @@
 export type Bay = "h3" | "krea" | "edit" | "upscale";
 
+export const BAY_IDS: Bay[] = ["h3", "krea", "edit", "upscale"];
+
+export function isBay(v: unknown): v is Bay {
+  return v === "h3" || v === "krea" || v === "edit" || v === "upscale";
+}
+
 export type MediaKind = "picture" | "video" | "audio";
 
 export type ConnectionStatus = "demo" | "checking" | "online" | "offline";
