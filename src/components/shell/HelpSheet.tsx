@@ -61,8 +61,11 @@ function renderMd(md: string) {
       }
       i += 1;
       blocks.push(
-        <pre key={k++} className="overflow-x-auto rounded-xl bg-bg px-4 py-3 font-mono text-[12px] leading-relaxed text-accent/90">
-          {buf.join("\n")}
+        <pre
+          key={k++}
+          className="block w-full shrink-0 overflow-x-auto whitespace-pre rounded-xl bg-bg px-4 py-3 font-mono text-[12px] leading-[1.6] text-accent/90"
+        >
+          <code className="block whitespace-pre">{buf.join("\n")}</code>
         </pre>,
       );
       continue;
@@ -107,6 +110,15 @@ function renderMd(md: string) {
           </div>,
         );
       }
+      continue;
+    }
+    if (/^####\s+/.test(line)) {
+      blocks.push(
+        <h4 key={k++} className="pt-3 text-[14px] font-medium text-fg">
+          {inlineFmt(line.replace(/^####\s+/, ""))}
+        </h4>,
+      );
+      i += 1;
       continue;
     }
     if (/^###\s+/.test(line)) {
@@ -165,7 +177,7 @@ function renderMd(md: string) {
     }
     const buf: string[] = [line];
     i += 1;
-    while (i < lines.length && lines[i].trim() && !/^(#{1,3}\s+|```|\||---|[-*]\s+|\d+\.\s+)/.test(lines[i])) {
+    while (i < lines.length && lines[i].trim() && !/^(#{1,4}\s+|```|\||---|[-*]\s+|\d+\.\s+)/.test(lines[i])) {
       buf.push(lines[i]);
       i += 1;
     }
@@ -203,7 +215,7 @@ export function HelpSheet({ open, onClose }: { open: boolean; onClose: () => voi
             </a>
           ))}
         </nav>
-        <article className="flex max-h-[80dvh] flex-col gap-3 overflow-y-auto p-5 md:p-6">
+        <article className="max-h-[80dvh] space-y-3 overflow-y-auto p-5 md:p-6">
           <p className="font-medium tracking-[0.16em] text-accent">ZERO · Media creation</p>
           {body}
         </article>
