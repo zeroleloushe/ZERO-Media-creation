@@ -3,6 +3,8 @@ import { H3Workspace } from "@/components/h3/H3Workspace";
 import { KreaWorkspace } from "@/components/krea/KreaWorkspace";
 import { UpscaleWorkspace } from "@/components/upscale/UpscaleWorkspace";
 import { GallerySheet } from "@/components/shell/GallerySheet";
+import { HelpSheet } from "@/components/shell/HelpSheet";
+import { HwBar } from "@/components/shell/HwBar";
 import { LinkSheet } from "@/components/shell/LinkSheet";
 import { NotesSheet } from "@/components/shared/NotesSheet";
 import { Button } from "@/components/ui/button";
@@ -14,7 +16,7 @@ import { useLab } from "@/lib/store";
 import type { Bay } from "@/lib/types";
 import { isBay } from "@/lib/types";
 import { copyText, downloadText, formatClock } from "@/lib/utils";
-import { Clapperboard, Download, Images, Link2, MemoryStick, Square, StickyNote } from "lucide-react";
+import { CircleHelp, Clapperboard, Download, Images, Link2, MemoryStick, Square, StickyNote } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 
@@ -32,6 +34,7 @@ export function AppShell() {
   const [linkOpen, setLinkOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const [freeing, setFreeing] = useState(false);
 
   useEffect(() => {
@@ -103,6 +106,9 @@ export function AppShell() {
       <Button variant="ghost" size="icon-sm" onClick={() => setNotesOpen(true)} aria-label="Заметки">
         <StickyNote />
       </Button>
+      <Button variant="ghost" size="icon-sm" onClick={() => setHelpOpen(true)} aria-label="Справка">
+        <CircleHelp />
+      </Button>
       <Button variant="ghost" size="icon-sm" onClick={() => setGalleryOpen(true)} aria-label="Галерея">
         <Images />
       </Button>
@@ -128,6 +134,9 @@ export function AppShell() {
         <StickyNote />
         <span className="hidden xl:inline">Заметки</span>
       </Button>
+      <Button variant="ghost" size="icon-sm" onClick={() => setHelpOpen(true)} aria-label="Справка">
+        <CircleHelp />
+      </Button>
       <Button variant="ghost" size="icon-sm" onClick={() => setGalleryOpen(true)} aria-label="Галерея">
         <Images />
       </Button>
@@ -147,8 +156,8 @@ export function AppShell() {
   return (
     <div className="grain flex h-dvh flex-col overflow-hidden bg-bg text-fg">
       <header className="sticky top-0 z-30 border-b border-line bg-bg/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1400px] flex-col lg:h-[72px] lg:flex-row lg:items-center lg:gap-2 lg:px-4">
-          <div className="flex h-12 min-w-0 items-center gap-2 px-3 lg:h-auto lg:flex-1 lg:px-0">
+        <div className="mx-auto flex max-w-[1400px] flex-col lg:min-h-[72px] lg:px-4">
+          <div className="flex h-12 min-w-0 items-center gap-2 px-3 lg:h-[72px] lg:flex-1 lg:px-0">
             <div className="flex min-w-0 shrink-0 flex-col justify-center leading-none">
               <span className="text-[15px] font-semibold tracking-[0.16em] text-accent lg:text-[16px]">ZERO</span>
               <span className="mt-1 text-[8px] font-medium uppercase tracking-[0.22em] text-muted lg:mt-1.5 lg:text-[9px]">
@@ -195,6 +204,7 @@ export function AppShell() {
           <div className="flex items-center justify-around gap-0.5 border-t border-line px-1 py-1 lg:hidden">
             {iconTools}
           </div>
+          <HwBar />
         </div>
       </header>
 
@@ -227,6 +237,7 @@ export function AppShell() {
       <LinkSheet open={linkOpen} onClose={() => setLinkOpen(false)} />
       <GallerySheet open={galleryOpen} onClose={() => setGalleryOpen(false)} />
       <NotesSheet open={notesOpen} onClose={() => setNotesOpen(false)} />
+      <HelpSheet open={helpOpen} onClose={() => setHelpOpen(false)} />
       <Toaster
         theme="dark"
         position="top-center"

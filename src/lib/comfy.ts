@@ -355,3 +355,80 @@ export async function waitForPrompt(
   throw new Error("Таймаут ожидания Comfy");
 }
 
+export type HwSnapshot = {
+  ramUsed: number;
+  ramTotal: number;
+  vramUsed: number;
+  vramTotal: number;
+  gpu?: string;
+  tempC?: number;
+};
+
+function num(v: unknown) {
+  const n = typeof v === "number" ? v : Number(v);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
+function pickTemp(raw: unknown): number | undefined {
+  if (!raw || typeof raw !== "object") return undefined;
+  const o = raw as Record<string, unknown>;
+  const gpus = Array.isArray(o.gpus) ? o.gpus : Array.isArray(o.gpu) ? o.gpu : null;
+  const g0 = gpus && typeof gpus[0] === "object" && gpus[0] ? (gpus[0] as Record<string, unknown>) : o;
+  const t = g0.gpu_temperature ?? g0.temperature ?? o.gpu_temperature ?? o.temperature;
+  const n = typeof t === "number" ? t : Number(t);
+  return Number.isFinite(n) && n > 0 && n < 130 ? n : undefined;
+}
+
+let crystoolsPath: string | null | undefined;
+
+export async function fetchHwStats(url: string): Promise<HwSnapshot | null> {
+  const base = normalizeComfyUrl(url);
+  if (!base) return null;
+  try {
+    const res = await comfyFetch(base, "/system_stats");
+    if (!res.ok) return null;
+    const data = (await res.json()) as {
+      system?: { ram_total?: number; ram_free?: number };
+      devices?: { name?: string; vram_total?: number; vram_free?: number }[];
+    };
+    const ramTotal = num(data.system?.ram_total);
+    const ramFree = num(data.system?.ram_free);
+    const gpu = data.devices?.[0];
+    const vramTotal = num(gpu?.vram_total);
+    const vramFree = num(gpu?.vram_free);
+    const name = gpu?.name?.replace(/^cuda:\d+\s*/i, "").split(":")[0]?.trim();
+    const snap: HwSnapshot = {
+      ramUsed: ramTotal ? Math.max(0, ramTotal - ramFree) : 0,
+      ramTotal,
+      vramUsed: vramTotal ? Math.max(0, vramTotal - vramFree) : 0,
+      vramTotal,
+      gpu: name || undefined,
+    };
+    if (crystoolsPath !== null) {
+      const paths = crystoolsPath ? [crystoolsPath] : ["/crystools/monitor", "/api/crystools/monitor"];
+      let hit = false;
+      for (const p of paths) {
+        try {
+          const c = await comfyFetch(base, p);
+          if (!c.ok) continue;
+          const temp = pickTemp(await c.json().catch(() => null));
+          if (temp != null) {
+            snap.tempC = temp;
+            crystoolsPath = p;
+            hit = true;
+            break;
+          }
+        } catch {
+          /* try next */
+        }
+      }
+      if (!hit) crystoolsPath = null;
+    }
+    if (!snap.ramTotal && !snap.vramTotal) return null;
+    return snap;
+  } catch {
+    return null;
+  }
+}
+
+
