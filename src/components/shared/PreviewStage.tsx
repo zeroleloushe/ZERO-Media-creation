@@ -48,6 +48,7 @@ export function PreviewStage({
   progress,
   hint,
   onUpscale,
+  className,
 }: {
   url: string | null;
   kind: "image" | "video";
@@ -62,6 +63,7 @@ export function PreviewStage({
   progress?: number;
   hint?: string;
   onUpscale?: () => void;
+  className?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
@@ -142,7 +144,7 @@ export function PreviewStage({
   );
 
   return (
-    <div className="relative flex min-h-[240px] w-full flex-1 items-center justify-center overflow-hidden rounded-2xl bg-surface lg:min-h-[min(36dvh,420px)]">
+    <div className={cn("relative flex min-h-[240px] w-full flex-1 items-center justify-center overflow-hidden rounded-2xl bg-surface lg:min-h-[min(36dvh,420px)]", className)}>
       {!frame ? (
         <div className="flex flex-col items-center gap-3 px-8 text-center">
           <div className="flex gap-1">

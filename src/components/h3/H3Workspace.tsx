@@ -128,7 +128,7 @@ export function H3Workspace() {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:h-full lg:min-h-0 lg:flex-1 lg:grid-cols-[minmax(0,1fr)_340px]">
-      <div className="flex min-h-0 flex-col gap-4 lg:h-full">
+      <div className="flex min-h-0 flex-col gap-4 overflow-y-auto lg:h-full lg:overflow-hidden">
         <PreviewStage
           url={preview}
           kind="video"
@@ -142,13 +142,9 @@ export function H3Workspace() {
           progress={Math.max(liveProgress, running?.progress ?? 0)}
           empty="Загрузи референсы слева внизу и нажми Пуск. В демо увидишь ролик с платформы."
           onUpscale={() => void sendH3ToLatentUpscale()}
+          className="min-h-[160px] max-h-[min(46dvh,520px)] shrink-0 lg:max-h-[min(52dvh,640px)]"
         />
-        <div
-          className={cn(
-            "shrink-0 rounded-2xl bg-surface p-4",
-            chunksOn && h3.refMode === "per_chunk" && "max-h-[48vh] overflow-y-auto",
-          )}
-        >
+        <div className="min-h-[140px] flex-1 overflow-y-auto overscroll-contain rounded-2xl bg-surface p-4">
           {chunksOn ? (
             <>
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">

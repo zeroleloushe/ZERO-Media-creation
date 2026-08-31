@@ -63,7 +63,7 @@ export function UpscaleWorkspace() {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:h-full lg:min-h-0 lg:flex-1 lg:grid-cols-[minmax(0,1fr)_340px]">
-      <div className="flex min-h-0 flex-col gap-4 lg:h-full">
+      <div className="flex min-h-0 flex-col gap-4 overflow-y-auto lg:h-full lg:overflow-hidden">
         <PreviewStage
           url={preview}
           kind="video"
@@ -80,10 +80,12 @@ export function UpscaleWorkspace() {
               ? "Латент первого прохода H3 → апскейлер, без encode."
               : "Загрузи ролик или возьми его из галереи. Пуск прогонит encode → upscale → чанки MiniMax."
           }
+          className="min-h-[160px] max-h-[min(46dvh,520px)] shrink-0 lg:max-h-[min(52dvh,640px)]"
         />
-        <div className="grid shrink-0 gap-3 rounded-2xl bg-surface p-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-          <div>
-            <ImageWell
+        <div className="min-h-[140px] flex-1 overflow-y-auto overscroll-contain rounded-2xl bg-surface p-4">
+          <div className="grid gap-3 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+            <div>
+              <ImageWell
               item={u.source}
               label="Исходное видео"
               compact
@@ -107,8 +109,8 @@ export function UpscaleWorkspace() {
                 Trim
               </button>
             ) : null}
-          </div>
-          <div>
+            </div>
+            <div>
             <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.16em] text-subtle">
               Референсы · персонаж / локация
             </p>
@@ -144,6 +146,7 @@ export function UpscaleWorkspace() {
             <p className="mt-2 text-[11px] leading-relaxed text-subtle">
               Идут во все чанки. Со 2-го чанка плюс последний кадр предыдущего.
             </p>
+          </div>
           </div>
         </div>
       </div>
