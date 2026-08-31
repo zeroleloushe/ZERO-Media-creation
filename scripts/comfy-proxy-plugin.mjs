@@ -27,7 +27,7 @@ function isAllowedTarget(raw) {
 }
 
 function attachComfyProxy(server) {
-  server.middlewares.use(async (req, res, next) => {
+  const handler = async (req, res, next) => {
     const rawUrl = req.url ?? "";
     const pathOnly = rawUrl.split("?", 1)[0] ?? "";
     if (!pathOnly.startsWith(COMFY_PROXY_PREFIX) || pathOnly === "/__comfy-ws") {
@@ -77,9 +77,15 @@ function attachComfyProxy(server) {
       res.setHeader("content-type", "application/json; charset=utf-8");
       res.end(JSON.stringify({ error: msg }));
     }
-  });
+  };
 
   return () => {
+    server.middlewares.use(handler);
+    const stack = server.middlewares.stack;
+    if (stack.length > 1) {
+      const last = stack.pop();
+      stack.unshift(last);
+    }
     server.httpServer?.on("upgrade", (req, socket, head) => {
       const raw = req.url ?? "";
       const pathOnly = raw.split("?", 1)[0] ?? "";
