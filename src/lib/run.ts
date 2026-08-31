@@ -441,7 +441,7 @@ export async function runBay(bay: Bay, opts?: { upscale?: boolean }) {
   }
 }
 
-export async function refreshLink() {
+export async function refreshLink(opts?: { silent?: boolean }) {
   const s = useLab.getState();
   if (!s.comfyUrl.trim()) {
     s.setConnection("demo", {});
@@ -450,8 +450,18 @@ export async function refreshLink() {
   s.setConnection("checking");
   const { status, info } = await pingComfy(s.comfyUrl);
   s.setConnection(status, info);
+  const greetKey = "zero:comfy-ok";
+  const prev = typeof sessionStorage !== "undefined" ? sessionStorage.getItem(greetKey) : null;
   if (status === "online") {
-    toast.success(info.gpu ? `Подключено · ${info.gpu}${info.vram ? ` · ${info.vram}` : ""}` : "ComfyUI на связи");
+    const already = prev === s.comfyUrl;
+    if (!opts?.silent || !already) {
+      toast.success(info.gpu ? `Подключено · ${info.gpu}${info.vram ? ` · ${info.vram}` : ""}` : "ComfyUI на связи");
+    }
+    try {
+      sessionStorage.setItem(greetKey, s.comfyUrl);
+    } catch {
+      /* private mode */
+    }
     try {
       const files = await fetchComfyLoras(s.comfyUrl);
       if (files.length) useLab.getState().setAvailableLoras(files);
@@ -472,5 +482,12 @@ export async function refreshLink() {
     } catch {
       /* keep defaults */
     }
-  } else if (status === "offline") toast.error(info.error || `Нет связи с ${s.comfyUrl}`);
+  } else if (status === "offline") {
+    try {
+      sessionStorage.removeItem(greetKey);
+    } catch {
+      /* */
+    }
+    toast.error(info.error || `Нет связи с ${s.comfyUrl}`);
+  }
 }

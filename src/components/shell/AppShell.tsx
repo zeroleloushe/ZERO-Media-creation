@@ -10,6 +10,7 @@ import { NotesSheet } from "@/components/shared/NotesSheet";
 import { Button } from "@/components/ui/button";
 import { Segmented } from "@/components/ui/group";
 import { BAYS } from "@/lib/presets";
+import { hydrateLabMedia } from "@/lib/media-hydrate";
 import { exportCurrent, interruptBay, refreshLink, runBay } from "@/lib/run";
 import { DEFAULT_COMFY_URL, freeComfyMemory, normalizeComfyUrl } from "@/lib/comfy";
 import { useLab } from "@/lib/store";
@@ -50,7 +51,8 @@ export function AppShell() {
         useLab.getState().setComfyUrl(DEFAULT_COMFY_URL);
       }
       if (isBay(b)) setBay(b);
-      await refreshLink();
+      await hydrateLabMedia();
+      await refreshLink({ silent: true });
     };
     void boot();
   }, [setBay]);

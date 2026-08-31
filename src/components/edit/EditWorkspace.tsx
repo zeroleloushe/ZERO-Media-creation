@@ -12,7 +12,7 @@ import { InsetGroup, InsetRow } from "@/components/ui/group";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { itemFromFile } from "@/lib/media";
+import { itemFromFile, forgetMedia, rememberCropped } from "@/lib/media";
 import { runBay } from "@/lib/run";
 import { useLab } from "@/lib/store";
 import { useState } from "react";
@@ -34,6 +34,7 @@ export function EditWorkspace() {
   const [cropWhich, setCropWhich] = useState<"image1" | "image2" | null>(null);
 
   async function setFile(which: "image1" | "image2", file: File) {
+    if (edit[which]) void forgetMedia(edit[which]);
     const item = await itemFromFile(file, "picture");
     patch({ [which]: item });
   }
@@ -61,7 +62,10 @@ export function EditWorkspace() {
             surfaceClass="aspect-video max-h-[200px] sm:aspect-[3/4] sm:max-h-[180px] lg:max-h-[min(200px,28dvh)]"
             onChange={(f) => void setFile("image1", f)}
             onCrop={() => setCropWhich("image1")}
-            onClear={() => patch({ image1: null })}
+            onClear={() => {
+              void forgetMedia(edit.image1);
+              patch({ image1: null });
+            }}
           />
           <ImageWell
             item={edit.image2}
@@ -69,7 +73,10 @@ export function EditWorkspace() {
             surfaceClass="aspect-video max-h-[200px] sm:aspect-[3/4] sm:max-h-[180px] lg:max-h-[min(200px,28dvh)]"
             onChange={(f) => void setFile("image2", f)}
             onCrop={() => setCropWhich("image2")}
-            onClear={() => patch({ image2: null })}
+            onClear={() => {
+              void forgetMedia(edit.image2);
+              patch({ image2: null });
+            }}
           />
         </div>
       </div>
@@ -159,6 +166,7 @@ export function EditWorkspace() {
           onClose={() => setCropWhich(null)}
           onApply={(c, url) => {
             patch({ [cropWhich]: { ...cropItem, crop: c, croppedUrl: url } });
+            void rememberCropped(cropItem, url);
             setCropWhich(null);
           }}
         />

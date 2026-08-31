@@ -32,6 +32,21 @@ export async function getGalleryBlob(id: string): Promise<Blob | null> {
   });
 }
 
+export async function delGalleryBlob(id: string) {
+  const db = await openDb();
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(STORE, "readwrite");
+    tx.objectStore(STORE).delete(id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+  const cached = urlCache.get(id);
+  if (cached) {
+    URL.revokeObjectURL(cached);
+    urlCache.delete(id);
+  }
+}
+
 const urlCache = new Map<string, string>();
 
 export async function getGalleryUrl(id: string): Promise<string | null> {

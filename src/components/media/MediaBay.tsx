@@ -1,7 +1,8 @@
 import { CropDialog } from "@/components/media/CropDialog";
 import { TrimDialog } from "@/components/media/TrimDialog";
 import { useLab } from "@/lib/store";
-import { itemFromFile } from "@/lib/media";
+import { itemFromFile, forgetMedia, rememberCropped } from "@/lib/media";
+import { pickFiles } from "@/lib/file-pick";
 import type { MediaBundle, MediaItem, MediaKind } from "@/lib/types";
 import { cn, formatTime } from "@/lib/utils";
 import { Crop, Plus, Scissors, Trash2 } from "lucide-react";
@@ -94,26 +95,21 @@ function AddTile({
   onFiles: (files: File[]) => void;
 }) {
   return (
-    <label
+    <button
+      type="button"
       className={cn(
         "relative flex shrink-0 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-line-strong text-muted hover:border-fg/40 hover:text-fg",
         compact ? "h-[calc(72px*4/3+32px)] w-[72px]" : "h-[calc(108px*4/3+32px)] w-[108px]",
       )}
+      onClick={() => {
+        void pickFiles({ accept, multiple }).then((files) => {
+          if (files.length) onFiles(files);
+        });
+      }}
     >
       <Plus className="size-4" />
       <span className="px-2 text-center text-[11px] leading-tight">{label}</span>
-      <input
-        type="file"
-        accept={accept}
-        multiple={multiple}
-        className="absolute inset-0 cursor-pointer opacity-0"
-        onChange={(e) => {
-          const files = Array.from(e.target.files ?? []);
-          e.target.value = "";
-          if (files.length) onFiles(files);
-        }}
-      />
-    </label>
+    </button>
   );
 }
 
@@ -220,7 +216,10 @@ function MediaBayView({
               compact={compact}
               onCrop={() => setCropItem({ slot: row.slot, item })}
               onTrim={() => setTrimItem({ slot: row.slot, item })}
-              onRemove={() => setSlot(row.slot, bundle[row.slot].filter((m) => m.id !== item.id))}
+              onRemove={() => {
+                void forgetMedia(item);
+                setSlot(row.slot, bundle[row.slot].filter((m) => m.id !== item.id));
+              }}
             />
           ))}
           {bundle[row.slot].length < CAP[row.slot] ? (
@@ -242,6 +241,7 @@ function MediaBayView({
           onClose={() => setCropItem(null)}
           onApply={(crop, croppedUrl) => {
             patchItem(cropItem.slot, cropItem.item.id, { crop, croppedUrl });
+            void rememberCropped(cropItem.item, croppedUrl);
             setCropItem(null);
           }}
         />
@@ -324,7 +324,9 @@ export function ImageWell({
   return (
     <div className="min-w-0">
       <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.16em] text-subtle">{label}</p>
-      <label
+      <div
+        role="button"
+        tabIndex={0}
         onDragOver={(e) => {
           e.preventDefault();
           setOver(true);
@@ -335,6 +337,19 @@ export function ImageWell({
           setOver(false);
           const f = e.dataTransfer.files[0];
           if (f) onChange(f);
+        }}
+        onClick={() => {
+          void pickFiles({ accept, multiple: false }).then((files) => {
+            if (files[0]) onChange(files[0]);
+          });
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            void pickFiles({ accept, multiple: false }).then((files) => {
+              if (files[0]) onChange(files[0]);
+            });
+          }
         }}
         className={cn(
           "relative block w-full cursor-pointer overflow-hidden rounded-xl bg-elevated",
@@ -355,17 +370,7 @@ export function ImageWell({
             <span className="text-xs">Перетащи или выбери</span>
           </span>
         )}
-        <input
-          type="file"
-          accept={accept}
-          className="absolute inset-0 cursor-pointer opacity-0"
-          onChange={(e) => {
-            const f = e.target.files?.[0];
-            e.target.value = "";
-            if (f) onChange(f);
-          }}
-        />
-      </label>
+      </div>
       {item ? (
         <div className="mt-2 flex gap-1">
           {onCrop ? (

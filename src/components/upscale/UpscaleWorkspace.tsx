@@ -8,7 +8,8 @@ import { Textarea } from "@/components/ui/field";
 import { InsetGroup, InsetRow, Segmented } from "@/components/ui/group";
 import { NumberField } from "@/components/ui/number-field";
 import { Slider } from "@/components/ui/slider";
-import { itemFromFile } from "@/lib/media";
+import { itemFromFile, forgetMedia } from "@/lib/media";
+import { pickFiles } from "@/lib/file-pick";
 import { computeResolution } from "@/lib/resolution";
 import { useLab } from "@/lib/store";
 import { Plus, Scissors } from "lucide-react";
@@ -46,6 +47,7 @@ export function UpscaleWorkspace() {
       : null;
 
   async function setSource(file: File) {
+    if (u.source) void forgetMedia(u.source);
     const item = await itemFromFile(file, "video");
     patch({ source: item, useH3Latent: false });
   }
@@ -88,7 +90,10 @@ export function UpscaleWorkspace() {
               accept="video/*"
               kind="video"
               onChange={(f) => void setSource(f)}
-              onClear={() => patch({ source: null, useH3Latent: false })}
+              onClear={() => {
+                void forgetMedia(u.source);
+                patch({ source: null, useH3Latent: false });
+              }}
             />
             {u.useH3Latent ? (
               <p className="mt-2 text-[11px] text-muted">Латент H3 · без VAE encode</p>
@@ -113,26 +118,27 @@ export function UpscaleWorkspace() {
                   key={p.id}
                   type="button"
                   className="relative size-[72px] overflow-hidden rounded-lg bg-elevated"
-                  onClick={() => patch({ pictures: u.pictures.filter((x) => x.id !== p.id) })}
+                  onClick={() => {
+                    void forgetMedia(p);
+                    patch({ pictures: u.pictures.filter((x) => x.id !== p.id) });
+                  }}
                   title="Убрать"
                 >
                   <img src={p.croppedUrl || p.url} alt="" className="size-full object-cover" />
                 </button>
               ))}
               {u.pictures.length < 9 ? (
-                <label className="grid size-[72px] cursor-pointer place-items-center rounded-lg border border-dashed border-line text-muted hover:text-fg">
+                <button
+                  type="button"
+                  className="grid size-[72px] cursor-pointer place-items-center rounded-lg border border-dashed border-line text-muted hover:text-fg"
+                  onClick={() => {
+                    void pickFiles({ accept: "image/*", multiple: true }).then((files) => {
+                      if (files.length) void addRef(files);
+                    });
+                  }}
+                >
                   <Plus className="size-4" />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    className="hidden"
-                    onChange={(e) => {
-                      if (e.target.files) void addRef(e.target.files);
-                      e.target.value = "";
-                    }}
-                  />
-                </label>
+                </button>
               ) : null}
             </div>
             <p className="mt-2 text-[11px] leading-relaxed text-subtle">

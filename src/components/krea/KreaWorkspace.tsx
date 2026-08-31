@@ -13,7 +13,7 @@ import { PresetBar } from "@/components/shared/PresetBar";
 import { ResolutionPicker } from "@/components/shared/ResolutionPicker";
 import { StylePanel } from "@/components/shared/StylePanel";
 import { composeKreaPrompt } from "@/lib/export-workflow";
-import { itemFromFile } from "@/lib/media";
+import { itemFromFile, forgetMedia, rememberCropped } from "@/lib/media";
 import { REASONING } from "@/lib/presets";
 import { runBay } from "@/lib/run";
 import { useLab } from "@/lib/store";
@@ -202,9 +202,15 @@ export function KreaWorkspace() {
               item={krea.loadImage}
               label="Кадр для LLM"
               compact
-              onChange={(file) => void itemFromFile(file, "picture").then((it) => patch({ loadImage: it }))}
+              onChange={(file) => {
+                if (krea.loadImage) void forgetMedia(krea.loadImage);
+                void itemFromFile(file, "picture").then((it) => patch({ loadImage: it }));
+              }}
               onCrop={() => krea.loadImage && setCrop(true)}
-              onClear={() => patch({ loadImage: null })}
+              onClear={() => {
+                void forgetMedia(krea.loadImage);
+                patch({ loadImage: null });
+              }}
             />
           </div>
           <InsetRow label="Модель">
@@ -232,6 +238,7 @@ export function KreaWorkspace() {
           onClose={() => setCrop(false)}
           onApply={(c, url) => {
             patch({ loadImage: { ...krea.loadImage!, crop: c, croppedUrl: url } });
+            void rememberCropped(krea.loadImage!, url);
             setCrop(false);
           }}
         />

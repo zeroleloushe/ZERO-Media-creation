@@ -1,5 +1,6 @@
-import type { MediaItem, MediaKind } from "./types";
+import type { MediaBundle, MediaItem, MediaKind } from "./types";
 import { uid } from "./utils";
+import { delGalleryBlob, getGalleryBlob, putGalleryBlob } from "./gallery-db";
 
 function loadImage(url: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
@@ -23,10 +24,87 @@ function mediaDuration(url: string, kind: "video" | "audio") {
   });
 }
 
-export async function itemFromFile(file: File, kind: MediaKind): Promise<MediaItem> {
+export function refBlobKey(id: string, crop = false) {
+  return crop ? `ref:${id}:crop` : `ref:${id}`;
+}
+
+export function freezeMedia(item: MediaItem): MediaItem {
+  return {
+    ...item,
+    url: item.url.startsWith("blob:") ? "" : item.url,
+    croppedUrl: undefined,
+  };
+}
+
+export function freezeBundle(b: MediaBundle): MediaBundle {
+  return {
+    pictures: b.pictures.map(freezeMedia),
+    videos: b.videos.map(freezeMedia),
+    audios: b.audios.map(freezeMedia),
+  };
+}
+
+export async function forgetMedia(item?: MediaItem | null) {
+  if (!item?.id) return;
+  if (item.url.startsWith("blob:")) URL.revokeObjectURL(item.url);
+  if (item.croppedUrl?.startsWith("blob:")) URL.revokeObjectURL(item.croppedUrl);
+  try {
+    await delGalleryBlob(refBlobKey(item.id));
+    await delGalleryBlob(refBlobKey(item.id, true));
+  } catch {
+    /* quota / private mode */
+  }
+}
+
+export async function rememberCropped(item: MediaItem, croppedUrl: string) {
+  try {
+    const blob = await fetch(croppedUrl).then((r) => r.blob());
+    if (blob.size) await putGalleryBlob(refBlobKey(item.id, true), blob);
+  } catch {
+    /* ignore */
+  }
+}
+
+export async function thawItem(item: MediaItem | null | undefined): Promise<MediaItem | null> {
+  if (!item?.id) return item ?? null;
+  const durable = item.url && !item.url.startsWith("blob:");
+  const blob = await getGalleryBlob(refBlobKey(item.id)).catch(() => null);
+  if (!blob) return durable ? item : null;
+  const url = URL.createObjectURL(blob);
+  const cropBlob = await getGalleryBlob(refBlobKey(item.id, true)).catch(() => null);
+  return {
+    ...item,
+    url,
+    croppedUrl: cropBlob ? URL.createObjectURL(cropBlob) : undefined,
+  };
+}
+
+export async function thawList(items: MediaItem[] | undefined): Promise<MediaItem[]> {
+  const out: MediaItem[] = [];
+  for (const it of items ?? []) {
+    const live = await thawItem(it);
+    if (live) out.push(live);
+  }
+  return out;
+}
+
+export async function thawBundle(b: MediaBundle | undefined): Promise<MediaBundle> {
+  return {
+    pictures: await thawList(b?.pictures),
+    videos: await thawList(b?.videos),
+    audios: await thawList(b?.audios),
+  };
+}
+
+export async function itemFromFile(file: File, kind: MediaKind, id = uid(kind)): Promise<MediaItem> {
+  try {
+    await putGalleryBlob(refBlobKey(id), file);
+  } catch {
+    /* still usable in this session via object URL */
+  }
   const url = URL.createObjectURL(file);
   const item: MediaItem = {
-    id: uid(kind),
+    id,
     kind,
     name: file.name,
     url,

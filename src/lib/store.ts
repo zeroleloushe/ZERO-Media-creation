@@ -20,6 +20,7 @@ import { isBay } from "./types";
 import { defaultLoraCatalog, loraLabel, LLM_MODELS, MMPROJ_MODELS, SAMPLERS, SCHEDULERS, SYSTEM_PROMPTS, UNET_MODELS } from "./presets";
 import { uid as makeId } from "./utils";
 import { emptyBundle } from "./h3-chunks";
+import { freezeBundle, freezeMedia } from "./media";
 import { DEFAULT_COMFY_URL } from "./comfy";
 
 const EMPTY_CATALOG = (): ModelCatalog => ({
@@ -596,16 +597,24 @@ export const useLab = create<LabState>()(
         comfyUrl: s.comfyUrl,
         h3: {
           ...s.h3,
-          pictures: [],
-          videos: [],
-          audios: [],
+          pictures: s.h3.pictures.map(freezeMedia),
+          videos: s.h3.videos.map(freezeMedia),
+          audios: s.h3.audios.map(freezeMedia),
           pixaromaAudio: null,
           audioFromPixaroma: false,
-          chunkRefs: [emptyBundle(), emptyBundle(), emptyBundle(), emptyBundle(), emptyBundle()],
+          chunkRefs: (s.h3.chunkRefs ?? []).map(freezeBundle),
         },
-        krea: { ...s.krea, loadImage: null },
-        edit: { ...s.edit, image1: null, image2: null },
-        upscale: { ...s.upscale, source: null, pictures: [] },
+        krea: { ...s.krea, loadImage: s.krea.loadImage ? freezeMedia(s.krea.loadImage) : null },
+        edit: {
+          ...s.edit,
+          image1: s.edit.image1 ? freezeMedia(s.edit.image1) : null,
+          image2: s.edit.image2 ? freezeMedia(s.edit.image2) : null,
+        },
+        upscale: {
+          ...s.upscale,
+          source: s.upscale.source ? freezeMedia(s.upscale.source) : null,
+          pictures: s.upscale.pictures.map(freezeMedia),
+        },
         jobs: s.jobs
           .filter((j) => j.status === "done" || j.status === "error")
           .slice(0, 80)
@@ -637,9 +646,15 @@ export const useLab = create<LabState>()(
             unet: (p.h3 as H3State | undefined)?.unet || current.h3.unet,
             upscaleModel:
               (p.h3 as H3State | undefined)?.upscaleModel || current.h3.upscaleModel,
-            pictures: current.h3.pictures,
-            videos: current.h3.videos,
-            audios: current.h3.audios,
+            pictures: Array.isArray((p.h3 as H3State | undefined)?.pictures)
+              ? (p.h3 as H3State).pictures
+              : current.h3.pictures,
+            videos: Array.isArray((p.h3 as H3State | undefined)?.videos)
+              ? (p.h3 as H3State).videos
+              : current.h3.videos,
+            audios: Array.isArray((p.h3 as H3State | undefined)?.audios)
+              ? (p.h3 as H3State).audios
+              : current.h3.audios,
             pixaromaAudio: null,
             audioFromPixaroma: false,
             genMode: (p.h3 as H3State | undefined)?.genMode ?? current.h3.genMode,
@@ -652,7 +667,9 @@ export const useLab = create<LabState>()(
               return arr.slice(0, 5);
             })(),
             refMode: (p.h3 as H3State | undefined)?.refMode ?? current.h3.refMode,
-            chunkRefs: current.h3.chunkRefs,
+            chunkRefs: Array.isArray((p.h3 as H3State | undefined)?.chunkRefs)
+              ? (p.h3 as H3State).chunkRefs
+              : current.h3.chunkRefs,
           },
           krea: {
             ...current.krea,
@@ -661,19 +678,21 @@ export const useLab = create<LabState>()(
             upscaleBy: (p.krea as KreaState | undefined)?.upscaleBy ?? current.krea.upscaleBy,
             upscaleMp: (p.krea as KreaState | undefined)?.upscaleMp ?? current.krea.upscaleMp,
             upscaleSnap: (p.krea as KreaState | undefined)?.upscaleSnap ?? current.krea.upscaleSnap,
-            loadImage: current.krea.loadImage,
+            loadImage: (p.krea as KreaState | undefined)?.loadImage ?? current.krea.loadImage,
           },
           edit: {
             ...current.edit,
             ...(p.edit ?? {}),
-            image1: current.edit.image1,
-            image2: current.edit.image2,
+            image1: (p.edit as EditState | undefined)?.image1 ?? current.edit.image1,
+            image2: (p.edit as EditState | undefined)?.image2 ?? current.edit.image2,
           },
           upscale: {
             ...current.upscale,
             ...(p.upscale ?? {}),
-            source: current.upscale.source,
-            pictures: current.upscale.pictures,
+            source: (p.upscale as UpscaleState | undefined)?.source ?? current.upscale.source,
+            pictures: Array.isArray((p.upscale as UpscaleState | undefined)?.pictures)
+              ? (p.upscale as UpscaleState).pictures
+              : current.upscale.pictures,
           },
           availableLoras: current.availableLoras,
           catalogs: current.catalogs,
