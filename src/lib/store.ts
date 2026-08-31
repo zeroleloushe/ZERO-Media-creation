@@ -40,6 +40,12 @@ function randSeed() {
   return Math.floor(Math.random() * 9_999_999);
 }
 
+function durableUrl(u: unknown): string | null {
+  if (typeof u !== "string" || u.length < 4) return null;
+  if (u.startsWith("blob:")) return null;
+  return u;
+}
+
 const defaultH3 = (): H3State => ({
   prompt: "",
   llm: false,
@@ -354,14 +360,23 @@ export const useLab = create<LabState>()(
       },
       setLive: ({ frame, hint, progress, append, mime, fps }) =>
         set((s) => {
+          const keep = new Set(
+            [s.previewH3, s.previewKrea, s.previewEdit, s.previewUpscale, ...s.jobs.map((j) => j.resultUrl)].filter(
+              (u): u is string => Boolean(u),
+            ),
+          );
+          const drop = (u: string) => {
+            if (!u.startsWith("blob:") || keep.has(u)) return;
+            URL.revokeObjectURL(u);
+          };
           let liveFrame = s.liveFrame;
           let liveFrames = s.liveFrames;
           let liveMime = s.liveMime;
           let liveFps = s.liveFps;
           let liveTick = s.liveTick;
           if (frame === null) {
-            for (const u of liveFrames) URL.revokeObjectURL(u);
-            if (liveFrame && !liveFrames.includes(liveFrame)) URL.revokeObjectURL(liveFrame);
+            for (const u of liveFrames) drop(u);
+            if (liveFrame && !liveFrames.includes(liveFrame)) drop(liveFrame);
             liveFrame = null;
             liveFrames = [];
             liveMime = null;
@@ -371,7 +386,7 @@ export const useLab = create<LabState>()(
               liveFrames = [...liveFrames, frame];
               if (liveFrames.length > 240) {
                 const dropped = liveFrames.splice(0, liveFrames.length - 240);
-                for (const u of dropped) URL.revokeObjectURL(u);
+                for (const u of dropped) drop(u);
               }
               liveFrame = frame;
               liveTick += 1;
@@ -383,7 +398,7 @@ export const useLab = create<LabState>()(
               liveTick += 1;
               if (dying.length) {
                 window.setTimeout(() => {
-                  for (const u of dying) URL.revokeObjectURL(u);
+                  for (const u of dying) drop(u);
                 }, 1500);
               }
             }
@@ -591,11 +606,18 @@ export const useLab = create<LabState>()(
         krea: { ...s.krea, loadImage: null },
         edit: { ...s.edit, image1: null, image2: null },
         upscale: { ...s.upscale, source: null, pictures: [] },
-        jobs: s.jobs.filter((j) => j.status === "done" || j.status === "error").slice(0, 80),
-        previewH3: s.previewH3,
-        previewKrea: s.previewKrea,
-        previewEdit: s.previewEdit,
-        previewUpscale: s.previewUpscale,
+        jobs: s.jobs
+          .filter((j) => j.status === "done" || j.status === "error")
+          .slice(0, 80)
+          .map((j) => ({
+            ...j,
+            resultUrl: durableUrl(j.resultUrl) ?? "",
+            thumb: durableUrl(j.thumb) ?? "",
+          })),
+        previewH3: durableUrl(s.previewH3),
+        previewKrea: durableUrl(s.previewKrea),
+        previewEdit: durableUrl(s.previewEdit),
+        previewUpscale: durableUrl(s.previewUpscale),
         scenePresets: s.scenePresets,
         activePreset: s.activePreset,
         notes: s.notes,
@@ -665,6 +687,17 @@ export const useLab = create<LabState>()(
           notes: Array.isArray(p.notes) ? p.notes : current.notes,
           customStyles: Array.isArray(p.customStyles) ? p.customStyles : current.customStyles,
           compareOn: false,
+          previewH3: durableUrl(p.previewH3),
+          previewKrea: durableUrl(p.previewKrea),
+          previewEdit: durableUrl(p.previewEdit),
+          previewUpscale: durableUrl(p.previewUpscale),
+          jobs: Array.isArray(p.jobs)
+            ? p.jobs.map((j) => ({
+                ...j,
+                resultUrl: durableUrl(j.resultUrl) ?? "",
+                thumb: durableUrl(j.thumb) ?? "",
+              }))
+            : current.jobs,
         };
       },
     },

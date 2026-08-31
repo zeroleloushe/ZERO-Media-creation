@@ -83,9 +83,14 @@ export function PreviewStage({
   }, [url, kind, running, muted]);
   const compareOn = useLab((s) => s.compareOn);
   const setCompareOn = useLab((s) => s.setCompareOn);
+  const [broken, setBroken] = useState(false);
   const sequence = running && liveFrames && liveFrames.length > 1;
   const showLive = Boolean(running && (liveUrl || sequence));
-  const frame = sequence ? liveFrames![liveFrames!.length - 1] : showLive ? liveUrl : url;
+  const rawFrame = sequence ? liveFrames![liveFrames!.length - 1] : showLive ? liveUrl : url;
+  useEffect(() => {
+    setBroken(false);
+  }, [rawFrame]);
+  const frame = broken ? null : rawFrame;
   const useCompare = Boolean(compare && frame && !showLive && compareOn);
   const canInspect = Boolean(frame && !running && !showLive);
 
@@ -156,6 +161,7 @@ export function PreviewStage({
             alt=""
             className={cn("absolute inset-0 size-full object-contain", canInspect && "cursor-zoom-in")}
             onClick={openInspect}
+            onError={() => setBroken(true)}
           />
           <div className="absolute inset-0 pointer-events-none" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>
             <img src={compare ?? ""} alt="" className="absolute inset-0 size-full object-contain" />
@@ -197,6 +203,7 @@ export function PreviewStage({
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
                 onClick={openInspect}
+                onError={() => setBroken(true)}
               />
               {videoButtons}
             </>
@@ -215,6 +222,7 @@ export function PreviewStage({
                 alt=""
                 className={mediaFill}
                 onClick={openInspect}
+                onError={() => setBroken(true)}
               />
               {showLive ? (
                 <span className="absolute left-3 top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-bg">
@@ -244,6 +252,7 @@ export function PreviewStage({
             onPlay={() => setPlaying(true)}
             onPause={() => setPlaying(false)}
             onClick={openInspect}
+            onError={() => setBroken(true)}
           />
           {videoButtons}
         </>
@@ -254,6 +263,7 @@ export function PreviewStage({
             alt=""
             className={mediaFill}
             onClick={openInspect}
+            onError={() => setBroken(true)}
           />
           <div className="absolute bottom-3 right-3">
             <Button variant="subtle" size="icon-sm" onClick={() => url && downloadUrl("seamless.jpg", url)}>

@@ -371,6 +371,15 @@ export async function runBay(bay: Bay, opts?: { upscale?: boolean }) {
           toast.error("Comfy закончил, но файл результата не пришёл в историю");
         } else {
           const blob = await fetchViewBlob(s.comfyUrl, out.file);
+          if (!blob || blob.size < 64) {
+            useLab.getState().patchJob(job.id, {
+              status: "done",
+              progress: 100,
+              durationMs: elapsed,
+              note: "Готово, файл результата пустой",
+            });
+            toast.error("Comfy закончил, но файл результата пустой");
+          } else {
           const url = URL.createObjectURL(blob);
           void putGalleryBlob(job.id, blob);
           useLab.getState().patchJob(job.id, {
@@ -392,6 +401,7 @@ export async function runBay(bay: Bay, opts?: { upscale?: boolean }) {
           useLab.getState().setPreview(bay, url, before);
           useLab.getState().setCompareOn(false);
           toast.success(wantUpscale ? "Апскейл готов" : "Готово");
+          }
         }
       } finally {
         socket.stop();
