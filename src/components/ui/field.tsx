@@ -38,7 +38,7 @@ export function SelectNative({ className, children, ...props }: SelectHTMLAttrib
   return (
     <select
       className={cn(
-        "h-9 max-w-[180px] rounded-md border border-line bg-chip px-2 text-sm text-fg outline-none",
+        "h-9 w-full min-w-0 rounded-md border border-line bg-chip px-2 text-sm text-fg outline-none",
         className,
       )}
       {...props}

@@ -291,15 +291,7 @@ export function H3Workspace() {
               <ModelSelect value={h3.mmproj} options={catalogs.mmproj} onChange={(mmproj) => patch({ mmproj })} />
             </InsetRow>
             <InsetRow label="Reasoning">
-              <select
-                className="h-8 rounded-md bg-chip px-2 text-xs outline-none"
-                value={h3.reasoning}
-                onChange={(e) => patch({ reasoning: e.target.value })}
-              >
-                {REASONING.map((m) => (
-                  <option key={m}>{m}</option>
-                ))}
-              </select>
+              <ModelSelect value={h3.reasoning} options={[...REASONING]} onChange={(reasoning) => patch({ reasoning })} />
             </InsetRow>
             <InsetRow label="System prompt">
               <ModelSelect
@@ -381,7 +373,6 @@ export function H3Workspace() {
           />
           <InsetRow label="Модель MiniMax H3">
             <ModelSelect
-              className="max-w-[240px]"
               value={h3.unet || "h3ErosMax_beta3.safetensors"}
               options={[
                 ...catalogs.unet.filter((n) => /h3|minimax/i.test(n)),

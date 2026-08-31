@@ -34,15 +34,15 @@ export function InsetRow({
   return (
     <div
       className={cn(
-        "flex min-h-11 items-center justify-between gap-3 border-b border-line px-3.5 last:border-b-0",
+        "flex min-h-11 items-center gap-3 border-b border-line px-3.5 last:border-b-0",
         className,
       )}
     >
-      <div className="min-w-0">
-        <div className="truncate text-sm text-fg">{label}</div>
-        {hint ? <div className="text-[11px] text-subtle">{hint}</div> : null}
+      <div className="w-[7.5rem] shrink-0" title={label || undefined}>
+        <div className="truncate text-sm text-fg">{label || "\u00a0"}</div>
+        {hint ? <div className="truncate text-[11px] text-subtle">{hint}</div> : null}
       </div>
-      <div className="flex shrink-0 items-center gap-2">{children}</div>
+      <div className="flex min-w-0 flex-1 items-center justify-end gap-2">{children}</div>
     </div>
   );
 }

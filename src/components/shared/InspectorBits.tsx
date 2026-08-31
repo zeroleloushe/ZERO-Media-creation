@@ -26,7 +26,7 @@ export function SeedRow({
   return (
     <InsetRow label={label}>
       <input
-        className="w-24 bg-transparent text-right font-mono text-sm tabular-nums outline-none"
+        className="w-24 min-w-0 flex-1 bg-transparent text-right font-mono text-sm tabular-nums outline-none"
         value={value}
         onChange={(e) => onChange(Number(e.target.value) || 0)}
       />
@@ -56,7 +56,7 @@ export function RatioRow({
     <>
       <InsetRow label="Соотношение">
         <select
-          className="h-8 max-w-[140px] rounded-md bg-chip px-2 text-sm outline-none"
+          className="h-8 w-full min-w-0 rounded-md bg-chip px-2 text-sm outline-none"
           value={value}
           onChange={(e) => onRatio(e.target.value)}
         >
@@ -126,7 +126,7 @@ export function LoraList({
               onChange={(n) => onStrength(l.id, n)}
             />
             <Slider
-              className="w-16 shrink-0"
+              className="w-16 shrink-0 flex-none"
               min={0}
               max={1.5}
               step={0.05}
@@ -247,7 +247,7 @@ export function ModelSelect({
   const list = value && !options.includes(value) ? [value, ...options] : options;
   return (
     <select
-      className={cn("h-8 max-w-[180px] rounded-md bg-chip px-2 text-xs outline-none", className)}
+      className={cn("h-8 w-full min-w-0 rounded-md bg-chip px-2 text-xs outline-none", className)}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >

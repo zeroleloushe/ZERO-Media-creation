@@ -1,7 +1,7 @@
+import { Fold } from "@/components/shared/Fold";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { Input, Textarea } from "@/components/ui/field";
-import { InsetGroup } from "@/components/ui/group";
 import { loadFooocusStyles, mergePrompt, styleSnippet, type StyleEntry } from "@/lib/styles";
 import { useLab } from "@/lib/store";
 import { cn } from "@/lib/utils";
@@ -66,7 +66,8 @@ export function StylePanel({
   }
 
   return (
-    <InsetGroup header="Стили">
+    <>
+    <Fold title="Стили" hint={fooocus ? "Fooocus и свои" : "Только свои"} defaultOpen={false}>
       <div className="flex flex-col gap-2 p-2">
         <div className="relative">
           <Search className="pointer-events-none absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-subtle" />
@@ -115,6 +116,7 @@ export function StylePanel({
           Сохранить стиль
         </button>
       </div>
+    </Fold>
       <Dialog open={saveOpen} onClose={() => setSaveOpen(false)} title="Новый стиль">
         <div className="flex flex-col gap-3 p-5">
           <Input value={name} placeholder="Название" onChange={(e) => setName(e.target.value)} autoFocus />
@@ -144,7 +146,7 @@ export function StylePanel({
           </div>
         </div>
       </Dialog>
-    </InsetGroup>
+    </>
   );
 }
 

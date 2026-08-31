@@ -23,7 +23,7 @@ export function Slider({
       step={step}
       value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className={cn("h-8 w-28 accent-accent", className)}
+      className={cn("h-8 min-w-0 w-28 flex-1 accent-accent", className)}
     />
   );
 }

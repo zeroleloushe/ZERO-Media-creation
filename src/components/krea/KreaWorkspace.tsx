@@ -214,15 +214,7 @@ export function KreaWorkspace() {
             <ModelSelect value={krea.mmproj} options={catalogs.mmproj} onChange={(mmproj) => patch({ mmproj })} />
           </InsetRow>
           <InsetRow label="Reasoning">
-            <select
-              className="h-8 rounded-md bg-chip px-2 text-xs outline-none"
-              value={krea.reasoning}
-              onChange={(e) => patch({ reasoning: e.target.value })}
-            >
-              {REASONING.map((m) => (
-                <option key={m}>{m}</option>
-              ))}
-            </select>
+            <ModelSelect value={krea.reasoning} options={[...REASONING]} onChange={(reasoning) => patch({ reasoning })} />
           </InsetRow>
           <InsetRow label="System prompt">
             <ModelSelect

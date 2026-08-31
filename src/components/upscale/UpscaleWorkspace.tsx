@@ -216,7 +216,6 @@ export function UpscaleWorkspace() {
         <Fold title="Модели">
           <InsetRow label="MiniMax H3">
             <ModelSelect
-              className="max-w-[240px]"
               value={u.unet}
               options={[
                 ...catalogs.unet.filter((n) => /h3|minimax/i.test(n)),
@@ -227,7 +226,6 @@ export function UpscaleWorkspace() {
           </InsetRow>
           <InsetRow label="Latent upscaler">
             <ModelSelect
-              className="max-w-[240px]"
               value={u.upscaleModel}
               options={[
                 ...catalogs.upscaleModels.filter((n) => /minimax|h3/i.test(n)),
