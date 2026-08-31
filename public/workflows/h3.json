@@ -128,7 +128,7 @@
   "637": {
     "inputs": {
       "model": [
-        "150:290",
+        "150:1000",
         0
       ],
       "LoraLoaderState": "{\"version\":1,\"sep\":\", \",\"cacheMode\":\"last\",\"loras\":[{\"name\":\"minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors\",\"on\":false,\"sm\":1,\"sc\":1,\"triggers\":[]},{\"name\":\"Minimax H3\\\\VBVR_H3_attn_only.safetensors\",\"on\":false,\"sm\":1,\"sc\":1,\"triggers\":[]},{\"name\":\"Minimax H3\\\\moawxx_000002750.safetensors\",\"on\":false,\"sm\":0.75,\"sc\":0.75,\"triggers\":[]},{\"name\":\"Minimax H3\\\\HMPussy - PussyAnus LoRA\\\\vagassist_e40.safetensors\",\"on\":false,\"sm\":1,\"sc\":1,\"triggers\":[]},{\"name\":\"Minimax H3\\\\H3-GalaxyAce.safetensors\",\"on\":false,\"sm\":0.85,\"sc\":0.85,\"triggers\":[]}]}"
@@ -484,20 +484,6 @@
     "class_type": "ModelAttentionBackend",
     "_meta": {
       "title": "ModelAttentionBackend"
-    }
-  },
-  "150:290": {
-    "inputs": {
-      "shift_video": 12,
-      "shift_audio": 6,
-      "model": [
-        "150:1000",
-        0
-      ]
-    },
-    "class_type": "MiniMaxH3SigmaShift",
-    "_meta": {
-      "title": "ModelSamplingMiniMaxH3"
     }
   }
 }

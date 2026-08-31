@@ -35,6 +35,18 @@ function setInput(g: Graph, id: string, key: string, value: unknown) {
   if (!g[id]) return;
   g[id].inputs[key] = value;
 }
+function stripH3Sampling(g: Graph) {
+  for (const [id, n] of Object.entries(g)) {
+    if (n.class_type !== "MiniMaxH3SigmaShift" && n.class_type !== "ModelSamplingMiniMaxH3") continue;
+    const src = n.inputs.model;
+    for (const other of Object.values(g)) {
+      for (const [k, v] of Object.entries(other.inputs)) {
+        if (Array.isArray(v) && v[0] === id) other.inputs[k] = src;
+      }
+    }
+    delete g[id];
+  }
+}
 function enableLivePreview(g: Graph) {
   for (const n of Object.values(g)) if (n.class_type === "ModelPreviewOverrideKJ" && n.inputs) {
     n.inputs.suppress_default_preview = true;
@@ -585,6 +597,7 @@ export async function buildH3Graph(h3: H3State): Promise<Graph> {
     ]);
     applyH3ChunkGen(g, h3);
   } else applyH3Upscale(g, h3, up);
+  stripH3Sampling(g);
   enableLivePreview(g);
   return g;
 }
