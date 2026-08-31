@@ -214,8 +214,8 @@ export function H3Workspace() {
               value={h3.genMode}
               onChange={setGenMode}
               options={[
-                { id: "standard", label: "Standard" },
-                { id: "chunks", label: "Chunks" },
+                { id: "standard", label: "Обычный" },
+                { id: "chunks", label: "Чанки" },
               ]}
             />
           </div>
@@ -267,7 +267,7 @@ export function H3Workspace() {
               />
             </div>
           )}
-          <InsetRow label="Промпт через LLM" hint="байпас + энхансер">
+          <InsetRow label="Промпт через LLM" hint="улучшает текст перед генерацией">
             <Switch checked={h3.llm} onCheckedChange={(v) => patch({ llm: v })} />
           </InsetRow>
         </InsetGroup>
@@ -279,7 +279,7 @@ export function H3Workspace() {
         />
 
         {h3.llm ? (
-          <InsetGroup header="LLM · vision">
+          <InsetGroup header="LLM">
             <p className="px-3.5 pt-3 text-[11px] leading-relaxed text-muted">
               Картинка для vision — первый референс
               {chunksOn && h3.refMode === "per_chunk" ? " чанка 1" : " из Media Bay"}, если он есть.
@@ -287,13 +287,13 @@ export function H3Workspace() {
             <InsetRow label="Модель">
               <ModelSelect value={h3.llmModel} options={catalogs.llm} onChange={(llmModel) => patch({ llmModel })} />
             </InsetRow>
-            <InsetRow label="mmproj">
+            <InsetRow label="Проекция">
               <ModelSelect value={h3.mmproj} options={catalogs.mmproj} onChange={(mmproj) => patch({ mmproj })} />
             </InsetRow>
-            <InsetRow label="Reasoning">
+            <InsetRow label="Рассуждение">
               <ModelSelect value={h3.reasoning} options={[...REASONING]} onChange={(reasoning) => patch({ reasoning })} />
             </InsetRow>
-            <InsetRow label="System prompt">
+            <InsetRow label="Системный промпт">
               <ModelSelect
                 value={h3.systemPrompt}
                 options={catalogs.systemPrompts}
@@ -301,7 +301,7 @@ export function H3Workspace() {
               />
             </InsetRow>
             <SeedRow
-              label="Seed LLM"
+              label="Сид LLM"
               value={h3.seedLlm}
               onChange={(n) => patch({ seedLlm: n })}
               onRoll={() => useLab.getState().randomizeSeed("h3Llm")}
@@ -382,19 +382,19 @@ export function H3Workspace() {
             />
           </InsetRow>
           <SeedRow
-            label="Seed"
+            label="Сид"
             value={h3.seed}
             onChange={(n) => patch({ seed: n })}
             onRoll={() => useLab.getState().randomizeSeed("h3")}
           />
-          <InsetRow label="Steps">
+          <InsetRow label="Шаги">
             <NumberField value={h3.steps} min={1} max={30} digits={0} onChange={(n) => patch({ steps: Math.round(n) })} />
             <Slider min={1} max={30} step={1} value={h3.steps} onChange={(v) => patch({ steps: v })} />
           </InsetRow>
-          <InsetRow label="Sampler">
+          <InsetRow label="Семплер">
             <ModelSelect value={h3.sampler} options={catalogs.samplers} onChange={(sampler) => patch({ sampler })} />
           </InsetRow>
-          <InsetRow label="Scheduler">
+          <InsetRow label="Планировщик">
             <ModelSelect value={h3.scheduler} options={catalogs.schedulers} onChange={(scheduler) => patch({ scheduler })} />
           </InsetRow>
         </InsetGroup>

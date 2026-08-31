@@ -63,10 +63,10 @@ export function KreaWorkspace() {
               className="min-h-28 border-0 bg-transparent px-2"
             />
           </div>
-          <InsetRow label="LLM Enhance">
+          <InsetRow label="Промпт через LLM">
             <Switch checked={krea.llmEnhance} onCheckedChange={(v) => patch({ llmEnhance: v })} />
           </InsetRow>
-          <InsetRow label="Trigger words">
+          <InsetRow label="Триггер-слова">
             <Switch checked={krea.triggerOn} onCheckedChange={(v) => patch({ triggerOn: v })} />
           </InsetRow>
           {krea.triggerOn ? (
@@ -74,7 +74,7 @@ export function KreaWorkspace() {
               <Input value={krea.triggerWords} onChange={(e) => patch({ triggerWords: e.target.value })} />
             </div>
           ) : null}
-          <InsetRow label="Доп. промпт">
+          <InsetRow label="Дополнительный промпт">
             <Switch checked={krea.extraOn} onCheckedChange={(v) => patch({ extraOn: v })} />
           </InsetRow>
           {krea.extraOn ? (
@@ -106,36 +106,36 @@ export function KreaWorkspace() {
             onChange={(p) => patch(p)}
           />
           <SeedRow
-            label="Seed image"
+            label="Сид кадра"
             value={krea.seedImage}
             onChange={(n) => patch({ seedImage: n })}
             onRoll={() => useLab.getState().randomizeSeed("kreaImage")}
           />
           {krea.llmEnhance ? (
             <SeedRow
-              label="Seed LLM"
+              label="Сид LLM"
               value={krea.seedLlm}
               onChange={(n) => patch({ seedLlm: n })}
               onRoll={() => useLab.getState().randomizeSeed("kreaLlm")}
             />
           ) : null}
-          <InsetRow label="UNET">
+          <InsetRow label="Модель">
             <ModelSelect value={krea.unet} options={catalogs.unet} onChange={(unet) => patch({ unet })} />
           </InsetRow>
-          <InsetRow label="Steps">
+          <InsetRow label="Шаги">
             <NumberField value={krea.steps} min={4} max={30} digits={0} onChange={(n) => patch({ steps: Math.round(n) })} />
             <Slider min={4} max={30} step={1} value={krea.steps} onChange={(v) => patch({ steps: v })} />
           </InsetRow>
-          <InsetRow label="Sampler">
+          <InsetRow label="Семплер">
             <ModelSelect value={krea.sampler} options={catalogs.samplers} onChange={(sampler) => patch({ sampler })} />
           </InsetRow>
-          <InsetRow label="Scheduler">
+          <InsetRow label="Планировщик">
             <ModelSelect value={krea.scheduler} options={catalogs.schedulers} onChange={(scheduler) => patch({ scheduler })} />
           </InsetRow>
         </InsetGroup>
 
         <Fold title="Апскейл" hint="После генерации · целый кадр, без тайлов" defaultOpen>
-          <InsetRow label="Denoise">
+          <InsetRow label="Сила шума">
             <NumberField value={krea.denoise ?? 0.28} min={0} max={1} digits={2} onChange={(n) => patch({ denoise: n })} />
             <Slider min={0} max={1} step={0.01} value={krea.denoise ?? 0.28} onChange={(v) => patch({ denoise: v })} />
           </InsetRow>
@@ -158,7 +158,7 @@ export function KreaWorkspace() {
             />
             <Slider min={0.25} max={8} step={0.25} value={krea.upscaleMp ?? 6} onChange={(v) => patch({ upscaleMp: v })} />
           </InsetRow>
-          <InsetRow label="SNAP">
+          <InsetRow label="Шаг сетки">
             <Segmented
               size="sm"
               value={String(krea.upscaleSnap ?? 16)}
@@ -180,7 +180,7 @@ export function KreaWorkspace() {
         </Fold>
 
         <InsetGroup header="LoRA">
-          <InsetRow label="Enable LoRA">
+          <InsetRow label="Включить LoRA">
             <Switch checked={krea.loraOn} onCheckedChange={(v) => patch({ loraOn: v })} />
           </InsetRow>
           {krea.loraOn ? (
@@ -196,7 +196,7 @@ export function KreaWorkspace() {
         </InsetGroup>
 
         {krea.llmEnhance ? (
-        <InsetGroup header="LLM · vision">
+        <InsetGroup header="LLM">
           <div className="p-3">
             <ImageWell
               item={krea.loadImage}
@@ -210,13 +210,13 @@ export function KreaWorkspace() {
           <InsetRow label="Модель">
             <ModelSelect value={krea.llmModel} options={catalogs.llm} onChange={(llmModel) => patch({ llmModel })} />
           </InsetRow>
-          <InsetRow label="mmproj">
+          <InsetRow label="Проекция">
             <ModelSelect value={krea.mmproj} options={catalogs.mmproj} onChange={(mmproj) => patch({ mmproj })} />
           </InsetRow>
-          <InsetRow label="Reasoning">
+          <InsetRow label="Рассуждение">
             <ModelSelect value={krea.reasoning} options={[...REASONING]} onChange={(reasoning) => patch({ reasoning })} />
           </InsetRow>
-          <InsetRow label="System prompt">
+          <InsetRow label="Системный промпт">
             <ModelSelect
               value={krea.systemPrompt}
               options={catalogs.systemPrompts}

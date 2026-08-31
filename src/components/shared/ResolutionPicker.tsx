@@ -169,7 +169,7 @@ export function ResolutionPicker({
       ) : null}
 
       <div className="flex items-center gap-1.5 border-t border-line px-3 py-2">
-        <span className="mr-1 text-[11px] font-medium uppercase tracking-[0.14em] text-subtle">Snap</span>
+        <span className="mr-1 text-[11px] font-medium uppercase tracking-[0.14em] text-subtle">Шаг</span>
         {SNAP_STEPS.map((n) => {
           const on = snap === n;
           return (
@@ -182,7 +182,7 @@ export function ResolutionPicker({
                 on ? "bg-accent text-accent-fg" : "bg-chip text-muted hover:text-fg",
               )}
             >
-              {n === 0 ? "Off" : n}
+              {n === 0 ? "Выкл" : n}
             </button>
           );
         })}

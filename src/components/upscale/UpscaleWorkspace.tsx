@@ -167,7 +167,7 @@ export function UpscaleWorkspace() {
             <NumberField value={u.megapixels} min={0.5} max={2.5} digits={1} onChange={(n) => patch({ megapixels: n })} />
             <Slider min={0.5} max={2.5} step={0.1} value={u.megapixels} onChange={(v) => patch({ megapixels: v })} />
           </InsetRow>
-          <InsetRow label="Snap">
+          <InsetRow label="Шаг сетки">
             <Segmented
               size="sm"
               value={String(u.snap)}
@@ -191,22 +191,22 @@ export function UpscaleWorkspace() {
               options={[1, 2, 3, 4].map((n) => ({ id: String(n), label: String(n) }))}
             />
           </InsetRow>
-          <InsetRow label="Denoise">
+          <InsetRow label="Сила шума">
             <NumberField value={u.denoise} min={0} max={1} digits={2} onChange={(n) => patch({ denoise: n })} />
             <Slider min={0} max={1} step={0.01} value={u.denoise} onChange={(v) => patch({ denoise: v })} />
           </InsetRow>
-          <InsetRow label="Steps">
+          <InsetRow label="Шаги">
             <NumberField value={u.steps} min={2} max={16} digits={0} onChange={(n) => patch({ steps: Math.round(n) })} />
             <Slider min={2} max={16} step={1} value={u.steps} onChange={(v) => patch({ steps: v })} />
           </InsetRow>
-          <InsetRow label="Sampler">
+          <InsetRow label="Семплер">
             <ModelSelect value={u.sampler} options={catalogs.samplers} onChange={(sampler) => patch({ sampler })} />
           </InsetRow>
-          <InsetRow label="Scheduler">
+          <InsetRow label="Планировщик">
             <ModelSelect value={u.scheduler} options={catalogs.schedulers} onChange={(scheduler) => patch({ scheduler })} />
           </InsetRow>
           <SeedRow
-            label="Seed"
+            label="Сид"
             value={u.seed}
             onChange={(n) => patch({ seed: n })}
             onRoll={() => useLab.getState().randomizeSeed("upscale")}
@@ -224,7 +224,7 @@ export function UpscaleWorkspace() {
               onChange={(unet) => patch({ unet })}
             />
           </InsetRow>
-          <InsetRow label="Latent upscaler">
+          <InsetRow label="Латентный апскейлер">
             <ModelSelect
               value={u.upscaleModel}
               options={[

@@ -68,7 +68,7 @@ function SlotCard({
             <Crop className="size-3.5" />
           </button>
         ) : (
-          <button type="button" className="grid h-8 flex-1 place-items-center text-muted hover:text-fg" onClick={onTrim} aria-label="Trim">
+          <button type="button" className="grid h-8 flex-1 place-items-center text-muted hover:text-fg" onClick={onTrim} aria-label="Обрезать">
             <Scissors className="size-3.5" />
           </button>
         )}

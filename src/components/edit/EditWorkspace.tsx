@@ -52,7 +52,7 @@ export function EditWorkspace() {
           liveTick={liveTick}
           hint={liveHint}
           progress={Math.max(liveProgress, running?.progress ?? 0)}
-          empty="Загрузи исходник и карту персонажа. LLM здесь нет — только grounded edit."
+          empty="Загрузи исходник и карту персонажа. Здесь только правка по инструкции, без LLM."
         />
         <div className="grid shrink-0 grid-cols-1 gap-3 rounded-2xl bg-surface p-3 sm:grid-cols-2 sm:p-4">
           <ImageWell
@@ -112,7 +112,7 @@ export function EditWorkspace() {
             />
           ) : null}
           <SeedRow
-            label="Seed"
+            label="Сид"
             value={edit.seed}
             onChange={(n) => patch({ seed: n })}
             onRoll={() => useLab.getState().randomizeSeed("edit")}
@@ -131,7 +131,7 @@ export function EditWorkspace() {
         </InsetGroup>
 
         <Fold title="Апскейл" hint="После генерации · масштаб кадра" defaultOpen>
-          <InsetRow label="Denoise">
+          <InsetRow label="Сила шума">
             <NumberField value={edit.denoise} min={0} max={1} digits={2} onChange={(n) => patch({ denoise: n })} />
             <Slider min={0} max={1} step={0.01} value={edit.denoise} onChange={(v) => patch({ denoise: v })} />
           </InsetRow>
